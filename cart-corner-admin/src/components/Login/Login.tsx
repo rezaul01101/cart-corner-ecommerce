@@ -1,14 +1,28 @@
-'use client'
+"use client";
 import Head from "next/head";
 import Image from "next/image";
 import loginImage from "@/public/assets/images/login.avif";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
+import Form from "../Forms/Form";
+import FormInput from "../Forms/FormInput";
+import { SubmitHandler } from "react-hook-form";
+
+interface formValues {
+  id?: string;
+  password?: string;
+}
 
 const LoginComponent = () => {
   const router = useRouter();
-  const submitLogin=()=>{
-    router.push('/dashboard')
-  }
+
+  const onSubmit: SubmitHandler<formValues> = (data) => {
+    try {
+      console.log(data);
+      router.push("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <Head>
@@ -33,76 +47,60 @@ const LoginComponent = () => {
               </h1>
               <p className="text-gray-600">Login to your account</p>
             </div>
-            <form className="mt-8 space-y-6">
-              <div className="rounded-md shadow-sm -space-y-px">
+            <div className="mt-8 space-y-6">
+              <Form submitHandler={onSubmit}>
+                <div className="rounded-md shadow-sm -space-y-px">
+                  <div>
+                    <FormInput
+                      name="email"
+                      type="email"
+                      placeholder="Enter your email"
+                      label="Email"
+                    />
+                  </div>
+                  <div className="relative">
+                    <FormInput
+                      name="password"
+                      type="password"
+                      placeholder="Enter your password"
+                      label="Password"
+                    />
+                  </div>
+                </div>
+                <div className="flex items-center justify-between my-3">
+                  <div className="flex items-center">
+                    <input
+                      id="remember-me"
+                      name="remember-me"
+                      type="checkbox"
+                      className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
+                    />
+                    <label
+                      htmlFor="remember-me"
+                      className="ml-2 block text-sm text-gray-900"
+                    >
+                      Remember Me
+                    </label>
+                  </div>
+                  <div className="text-sm">
+                    <a
+                      href="#"
+                      className="font-medium text-red-600 hover:text-red-500"
+                    >
+                      Forgot password?
+                    </a>
+                  </div>
+                </div>
                 <div>
-                  <label htmlFor="email-address" className="sr-only">
-                    Email address
-                  </label>
-                  <input
-                    id="email-address"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    defaultValue="admin@example.com"
-                    className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
-                    placeholder="Email address"
-                  />
-                </div>
-                <div className="relative">
-                  <label htmlFor="password" className="sr-only">
-                    Password
-                  </label>
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    defaultValue="123456"
-                    className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
-                    placeholder="Password"
-                  />
-                  <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-                    
-                  </span>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <input
-                    id="remember-me"
-                    name="remember-me"
-                    type="checkbox"
-                    className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
-                  />
-                  <label
-                    htmlFor="remember-me"
-                    className="ml-2 block text-sm text-gray-900"
+                  <button
+                    type="submit"
+                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                   >
-                    Remember Me
-                  </label>
+                    Login
+                  </button>
                 </div>
-                <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-medium text-red-600 hover:text-red-500"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
-              </div>
-              <div>
-                <button
-                  onClick={()=>submitLogin()}
-                  type="button"
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                >
-                  Login
-                </button>
-              </div>
-            </form>
+              </Form>
+            </div>
             {/* <div className="mt-8 space-y-6">
               <div className="flex items-center justify-between">
                 <input

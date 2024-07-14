@@ -1,6 +1,9 @@
 'use client'
+import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react'
-import { FaUser, FaSignOutAlt, FaBars } from 'react-icons/fa'
+import { FaUser, FaSignOutAlt} from 'react-icons/fa'
+import { FaBarsStaggered } from "react-icons/fa6";
+
 
 interface TopbarProps {
   toggleSidebar: () => void
@@ -30,7 +33,7 @@ const TopBar: React.FC<TopbarProps> = ({ toggleSidebar }) => {
   return (
     <div className="h-16 bg-white shadow-md flex items-center justify-between px-6 relative">
       <button onClick={toggleSidebar} className="text-xl">
-        <FaBars />
+        <FaBarsStaggered />
       </button>
       <div className="flex items-center">
         <span className="mr-3">Admin</span>
@@ -48,10 +51,10 @@ const TopBar: React.FC<TopbarProps> = ({ toggleSidebar }) => {
                   <FaUser className="mr-2" />
                   <span>Profile</span>
                 </li>
-                <li className="px-4 py-2 hover:bg-gray-100 flex items-center cursor-pointer">
+                <Link href="/login" className="px-4 py-2 hover:bg-gray-100 flex items-center cursor-pointer">
                   <FaSignOutAlt className="mr-2" />
                   <span>Logout</span>
-                </li>
+                </Link>
               </ul>
             </div>
           )}

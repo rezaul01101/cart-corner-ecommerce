@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { HTMLProps } from "react";
 import {
   FaClipboardList,
   FaChartPie,
@@ -12,16 +12,15 @@ import {
 
 import { AiFillProduct } from "react-icons/ai";
 
-
 interface Submenu {
   title: string;
-  url?:string;
+  url?: any;
 }
 
 interface MenuItem {
   title: string;
   icon: JSX.Element;
-  url?:string;
+  url?: any;
   submenus: Submenu[];
 }
 
@@ -33,32 +32,35 @@ const menuItems: MenuItem[] = [
   {
     title: "Dashboard",
     icon: <FaChartPie />,
-    url:'/dashboard',
+    url: "/dashboard",
     submenus: [],
   },
   {
     title: "Products",
     icon: <AiFillProduct />,
-    url:'#',
+    url: "#",
     submenus: [
-      { title: "Add New Product",url:'/product'},
-      { title: "Product List",url:'/product/list' },
-      { title: "Category",url:'#' },
-      { title: "Brand",url:'#' },
-      { title: "Attribute",url:'#' },
-      { title: "Colors",url:'#' },
+      { title: "Add New Product", url: "/product" },
+      { title: "Product List", url: "/product/list" },
+      { title: "Category", url: "#" },
+      { title: "Brand", url: "#" },
+      { title: "Attribute", url: "#" },
+      { title: "Colors", url: "#" },
     ],
   },
   {
     title: "Sales",
     icon: <FaShoppingCart />,
-    url:'#',
-    submenus: [{ title: "All Orders",url:'#' }, { title: "Pending Orders",url:'#' }],
+    url: "#",
+    submenus: [
+      { title: "All Orders", url: "#" },
+      { title: "Pending Orders", url: "#" },
+    ],
   },
   {
     title: "Reports",
     icon: <FaClipboardList />,
-    url:'#',
+    url: "#",
     submenus: [],
   },
   // Add more menu items here if needed
@@ -89,7 +91,7 @@ const LeftSidebar: React.FC<SidebarProps> = ({ isOpen }) => {
       </div>
       <div className="flex-1 overflow-y-auto">
         <ul className="p-4">
-          {menuItems.map((item:MenuItem, index) => (
+          {menuItems.map((item: MenuItem, index) => (
             <li key={index} className="mb-4">
               <div
                 className="flex items-center justify-between cursor-pointer"
@@ -112,8 +114,11 @@ const LeftSidebar: React.FC<SidebarProps> = ({ isOpen }) => {
                       : "max-h-0 opacity-0 overflow-hidden"
                   }`}
                 >
-                  {item.submenus.map((submenu:Submenu, subIndex) => (
-                    <li key={subIndex} className="my-4 flex items-center cursor-pointer">
+                  {item.submenus.map((submenu: Submenu, subIndex) => (
+                    <li
+                      key={subIndex}
+                      className="my-4 flex items-center cursor-pointer"
+                    >
                       <Link href={submenu?.url}>{submenu.title}</Link>
                     </li>
                   ))}
@@ -123,10 +128,13 @@ const LeftSidebar: React.FC<SidebarProps> = ({ isOpen }) => {
           ))}
         </ul>
       </div>
-      <div className="h-16 border-t border-gray-700 flex items-center justify-center">
+      <Link
+        href="/login"
+        className="h-16 border-t border-gray-700 flex items-center justify-center"
+      >
         <FaSignOutAlt className="mr-3" />
         <span>Logout</span>
-      </div>
+      </Link>
     </div>
   );
 };
