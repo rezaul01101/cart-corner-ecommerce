@@ -43,7 +43,7 @@ const menuItems: MenuItem[] = [
       { title: "Add New Product", url: "/product" },
       { title: "Product List", url: "/product/list" },
       { title: "Category", url: "/category" },
-      { title: "Brand", url: "#" },
+      { title: "Brand", url: "/brand" },
       { title: "Attribute", url: "#" },
       { title: "Colors", url: "#" },
     ],

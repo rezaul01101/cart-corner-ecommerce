@@ -2,12 +2,15 @@
 import Form from "@/src/components/Forms/Form";
 import FormInput from "@/src/components/Forms/FormInput";
 import FormTextArea from "@/src/components/Forms/FormTextArea";
+import { brandSchemas } from "@/src/schemas/brand";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler } from "react-hook-form";
 interface formValues {
   name: string;
   description: string;
+  file: any;
 }
-const Category = () => {
+const Brand = () => {
   const onSubmit: SubmitHandler<formValues> = (data) => {
     try {
       console.log(data);
@@ -18,11 +21,12 @@ const Category = () => {
   return (
     <div className="grid grid-cols-3 gap-4">
       <div className="bg-white shadow-md rounded p-6">
-        <h3>Add new Category</h3>
+        <h3>Add new brand</h3>
         <hr className="my-2" />
-        <Form submitHandler={onSubmit}>
+        <Form submitHandler={onSubmit} resolver={yupResolver(brandSchemas)}>
           <FormInput name="name" type="text" placeholder="Name" label="Name" />
           <FormTextArea name="description" rows={7} label="Description" />
+          <FormInput name="file" type="file" placeholder="Name" label="Brand Logo" />
           <button
             type="submit"
             className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition duration-300"
@@ -32,10 +36,11 @@ const Category = () => {
         </Form>
       </div>
       <div className=" col-span-2 bg-white shadow-md rounded p-6">
-        Category Table
+        <h3>Add new brand</h3>
+        <hr className="my-2" />
       </div>
     </div>
   );
 };
 
-export default Category;
+export default Brand;
