@@ -11,9 +11,13 @@ interface formValues {
   file: any;
 }
 const Brand = () => {
-  const onSubmit: SubmitHandler<formValues> = (data) => {
+  const onSubmit: SubmitHandler<formValues> = async (data) => {
+    const formData= new FormData();
+    formData.append("file",data["file"] as Blob);
+    formData.append("name",data['name']);
+    formData.append("description",data['description']);
     try {
-      console.log(data);
+      console.log(data["name"]);
     } catch (error) {
       console.log(error);
     }
