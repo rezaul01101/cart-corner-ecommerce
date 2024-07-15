@@ -1,4 +1,5 @@
 "use client";
+import CategoryTable from "@/src/components/Category/CategoryTable";
 import Form from "@/src/components/Forms/Form";
 import FormInput from "@/src/components/Forms/FormInput";
 import FormTextArea from "@/src/components/Forms/FormTextArea";
@@ -32,7 +33,11 @@ const Category = () => {
         </Form>
       </div>
       <div className=" col-span-2 bg-white shadow-md rounded p-6">
-        Category Table
+      <h3>Category List</h3>
+        <hr className="my-2" />
+        <div>
+          <CategoryTable />
+        </div>
       </div>
     </div>
   );
