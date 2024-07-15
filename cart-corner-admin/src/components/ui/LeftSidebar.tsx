@@ -42,7 +42,7 @@ const menuItems: MenuItem[] = [
     submenus: [
       { title: "Add New Product", url: "/product" },
       { title: "Product List", url: "/product/list" },
-      { title: "Category", url: "#" },
+      { title: "Category", url: "/category" },
       { title: "Brand", url: "#" },
       { title: "Attribute", url: "#" },
       { title: "Colors", url: "#" },
@@ -92,7 +92,7 @@ const LeftSidebar: React.FC<SidebarProps> = ({ isOpen }) => {
       <div className="flex-1 overflow-y-auto">
         <ul className="p-4">
           {menuItems.map((item: MenuItem, index) => (
-            <li key={index} className="mb-4">
+            <li key={index} className="mb-5">
               <div
                 className="flex items-center justify-between cursor-pointer"
                 onClick={() => toggleMenu(index)}
@@ -108,7 +108,7 @@ const LeftSidebar: React.FC<SidebarProps> = ({ isOpen }) => {
               </div>
               {item.submenus.length > 0 && (
                 <ul
-                  className={`pl-8 my-3 transition-all duration-300 ease-in-out ${
+                  className={`pl-8 transition-all duration-300 ease-in-out ${
                     openMenus[index]
                       ? "max-h-screen opacity-100"
                       : "max-h-0 opacity-0 overflow-hidden"

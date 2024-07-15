@@ -27,7 +27,7 @@ const FormInput = ({
   const { control } = useFormContext();
   return (
     <>
-      <label htmlFor="email-address" className="sr-only">
+      <label htmlFor={id} className="text-sm mb-2">
         {label}
       </label>
       <Controller
@@ -35,11 +35,9 @@ const FormInput = ({
         name={name}
         render={({ field }) => (
           <input
-            
             id={id}
-            name={name}
             type={type}
-            className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
+            className="w-full text-sm py-2 pl-2 mb-2 border rounded-md"
             placeholder={placeholder}
             {...field}
             onBlur={field?.onBlur}
