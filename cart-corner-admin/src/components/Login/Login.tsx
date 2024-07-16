@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import Form from "../Forms/Form";
 import FormInput from "../Forms/FormInput";
 import { SubmitHandler } from "react-hook-form";
+import { useUserLoginMutation } from "@/src/redux/api/authApi";
+import { storeUserInfo } from "@/src/services/auth.service";
 
 interface formValues {
   id?: string;
@@ -14,11 +16,15 @@ interface formValues {
 
 const LoginComponent = () => {
   const router = useRouter();
-
-  const onSubmit: SubmitHandler<formValues> = (data) => {
+  const [userLogin] = useUserLoginMutation();
+  const onSubmit: SubmitHandler<formValues> = async (data: any) => {
+    // console.log(data);
+    
     try {
-      console.log(data);
-      router.push("/dashboard");
+      const res = await userLogin({ ...data }).unwrap();
+      storeUserInfo({ accessToken: res?.accessToken });
+      console.log(res);
+      // router.push("/dashboard");
     } catch (error) {
       console.log(error);
     }
