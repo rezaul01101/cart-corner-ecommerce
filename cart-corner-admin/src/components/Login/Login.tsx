@@ -7,7 +7,7 @@ import Form from "../Forms/Form";
 import FormInput from "../Forms/FormInput";
 import { SubmitHandler } from "react-hook-form";
 import { useUserLoginMutation } from "@/src/redux/api/authApi";
-import { storeUserInfo } from "@/src/services/auth.service";
+import { getUserInfo, storeUserInfo } from "@/src/services/auth.service";
 
 interface formValues {
   id?: string;
@@ -15,6 +15,7 @@ interface formValues {
 }
 
 const LoginComponent = () => {
+  console.log(getUserInfo())
   const router = useRouter();
   const [userLogin] = useUserLoginMutation();
   const onSubmit: SubmitHandler<formValues> = async (data: any) => {

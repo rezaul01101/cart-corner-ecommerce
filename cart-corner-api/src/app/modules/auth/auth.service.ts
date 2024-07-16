@@ -30,13 +30,13 @@ const loginUser = async (payload: ILoginUser) => {
 
   //create access token & refresh token
   const accessToken = createToken(
-    { email: email, id: isUserExist.id },
+    { email: email, id: isUserExist.id,name:isUserExist?.name},
     config.jwt.secret as string,
     config.jwt.expires_in as string
   );
 
   const refreshToken = createToken(
-    { email: email, id: isUserExist?.id },
+    { email: email, id: isUserExist?.id,name:isUserExist?.name },
     config.jwt.refresh_secret as string,
     config.jwt.refresh_expires_in as string
   );

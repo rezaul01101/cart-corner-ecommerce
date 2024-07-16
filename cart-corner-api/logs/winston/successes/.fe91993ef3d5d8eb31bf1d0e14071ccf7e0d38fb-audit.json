@@ -24,6 +24,11 @@
             "date": 1721132553484,
             "name": "/Users/Tareq/Rezaul/Softdevsol/ecommerce/main/cart-corner-api/logs/winston/successes/phu-2024-16-07-18-success.log",
             "hash": "edd77cb9f48618ce2349916c3c87b8b053850cb8c8026d14c4a48673ceb5d701"
+        },
+        {
+            "date": 1721135715870,
+            "name": "/Users/Tareq/Rezaul/Softdevsol/ecommerce/main/cart-corner-api/logs/winston/successes/phu-2024-16-07-19-success.log",
+            "hash": "b9b08594f33afe16ef86234f1e66f8b2164671a2a0eb269b0864362da34b22a0"
         }
     ],
     "hashType": "sha256"
