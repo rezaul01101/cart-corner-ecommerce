@@ -1,34 +1,47 @@
-'use client'
-import Link from 'next/link';
-import React, { useState, useRef, useEffect } from 'react'
-import { FaUser, FaSignOutAlt} from 'react-icons/fa'
+"use client";
+import { authKey } from "@/src/constants/storageKey";
+import { getUserInfo, removeUserInfo } from "@/src/services/auth.service";
+import { useRouter } from "next/navigation";
+import React, { useState, useRef, useEffect } from "react";
+import { FaUser, FaSignOutAlt } from "react-icons/fa";
 import { FaBarsStaggered } from "react-icons/fa6";
 
-
 interface TopbarProps {
-  toggleSidebar: () => void
+  toggleSidebar: () => void;
 }
 
 const TopBar: React.FC<TopbarProps> = ({ toggleSidebar }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const router = useRouter();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState<any>();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => {
-    setDropdownOpen((prev) => !prev)
-  }
+    setDropdownOpen((prev) => !prev);
+  };
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-      setDropdownOpen(false)
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setDropdownOpen(false);
     }
-  }
+  };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
+      const userInfo = getUserInfo();
+      setUserInfo(userInfo);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const logOut=()=>{
+    removeUserInfo(authKey);
+    router.push("/login");
+  }
 
   return (
     <div className="h-16 bg-white shadow-md flex items-center justify-between px-6 relative">
@@ -36,7 +49,7 @@ const TopBar: React.FC<TopbarProps> = ({ toggleSidebar }) => {
         <FaBarsStaggered />
       </button>
       <div className="flex items-center">
-        <span className="mr-3">Admin</span>
+        <span className="mr-3">{userInfo?.name}</span>
         <div className="relative" ref={dropdownRef}>
           <img
             src="https://via.placeholder.com/30"
@@ -51,17 +64,20 @@ const TopBar: React.FC<TopbarProps> = ({ toggleSidebar }) => {
                   <FaUser className="mr-2" />
                   <span>Profile</span>
                 </li>
-                <Link href="/login" className="px-4 py-2 hover:bg-gray-100 flex items-center cursor-pointer">
+                <div
+                onClick={()=>logOut()}
+                  className="px-4 py-2 hover:bg-gray-100 flex items-center cursor-pointer"
+                >
                   <FaSignOutAlt className="mr-2" />
                   <span>Logout</span>
-                </Link>
+                </div>
               </ul>
             </div>
           )}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TopBar
+export default TopBar;

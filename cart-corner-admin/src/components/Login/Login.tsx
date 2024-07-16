@@ -15,7 +15,7 @@ interface formValues {
 }
 
 const LoginComponent = () => {
-  console.log(getUserInfo())
+  // console.log(getUserInfo())
   const router = useRouter();
   const [userLogin] = useUserLoginMutation();
   const onSubmit: SubmitHandler<formValues> = async (data: any) => {
@@ -23,9 +23,11 @@ const LoginComponent = () => {
     
     try {
       const res = await userLogin({ ...data }).unwrap();
-      storeUserInfo({ accessToken: res?.accessToken });
-      console.log(res);
-      // router.push("/dashboard");
+      if(res?.accessToken){
+        storeUserInfo({ accessToken: res?.accessToken });
+         router.push("/dashboard");
+      }
+      // console.log(res);
     } catch (error) {
       console.log(error);
     }

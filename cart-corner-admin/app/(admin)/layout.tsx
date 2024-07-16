@@ -1,8 +1,10 @@
 "use client";
 import LeftSidebar from "@/src/components/ui/LeftSidebar";
 import TopBar from "@/src/components/ui/Topbar";
+import { isLoggedIn } from "@/src/services/auth.service";
 import type { Metadata } from "next";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 // export const metadata: Metadata = {
 //   title: "Admin panel",
@@ -18,6 +20,17 @@ export default function RootLayout({
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+  const userLoggedIn = isLoggedIn();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!userLoggedIn) {
+      router.push("/login");
+    }
+    setIsLoading(true);
+  }, [router, isLoading]);
+
   return (
     <html lang="en">
       <body>
