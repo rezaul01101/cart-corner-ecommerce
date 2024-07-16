@@ -11,6 +11,9 @@ import {
 } from "react-icons/fa";
 
 import { AiFillProduct } from "react-icons/ai";
+import { authKey } from "@/src/constants/storageKey";
+import { removeUserInfo } from "@/src/services/auth.service";
+import { useRouter } from "next/navigation";
 
 interface Submenu {
   title: string;
@@ -70,6 +73,7 @@ const LeftSidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   const [openMenus, setOpenMenus] = React.useState<{ [key: number]: boolean }>(
     {}
   );
+  const router = useRouter();
 
   const toggleMenu = (index: number) => {
     setOpenMenus((prev) => ({
@@ -77,7 +81,10 @@ const LeftSidebar: React.FC<SidebarProps> = ({ isOpen }) => {
       [index]: !prev[index],
     }));
   };
-
+  const logOut=()=>{
+    removeUserInfo(authKey);
+    router.push("/login");
+  }
   return (
     <div
       className={`h-screen bg-gray-900 text-white flex flex-col transition-width duration-300 ${
@@ -128,13 +135,13 @@ const LeftSidebar: React.FC<SidebarProps> = ({ isOpen }) => {
           ))}
         </ul>
       </div>
-      <Link
-        href="/login"
-        className="h-16 border-t border-gray-700 flex items-center justify-center"
+      <div
+       onClick={logOut}
+        className="h-16 border-t border-gray-700 flex items-center justify-center cursor-pointer"
       >
         <FaSignOutAlt className="mr-3" />
         <span>Logout</span>
-      </Link>
+      </div>
     </div>
   );
 };
