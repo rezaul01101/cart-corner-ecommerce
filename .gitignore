@@ -3,6 +3,7 @@
 # dependencies
 /cart-corner-admin/node_modules
 /cart-corner-frontend/node_modules
+/cart-corner-api/node_modules
 /.pnp
 .pnp.js
 .yarn/install-state.gz
@@ -31,6 +32,7 @@ yarn-error.log*
 # local env files
 /cart-corner-admin/.env*.local
 /cart-corner-frontend/.env*.local
+/cart-corner-api/.env
 
 # vercel
 .vercel

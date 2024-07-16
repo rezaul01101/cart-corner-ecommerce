@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/Tareq/Rezaul/Softdevsol/ecommerce/main/cart-corner-api/logs/winston/errors/.bf2ddeff1f8ff905e9ed98bdc76397521ee502c4-audit.json",
+    "files": [
+        {
+            "date": 1721098388293,
+            "name": "/Users/Tareq/Rezaul/Softdevsol/ecommerce/main/cart-corner-api/logs/winston/errors/phu-2024-16-07-08-error.log",
+            "hash": "346f5bc8f9b576a2be9b4f49084a87aedce19eedd825a24cc24c18f126ff9426"
+        }
+    ],
+    "hashType": "sha256"
+}
