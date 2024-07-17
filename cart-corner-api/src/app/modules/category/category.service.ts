@@ -1,9 +1,6 @@
-import {  Prisma,User } from "@prisma/client";
+
 import prisma from "../../../shared/prisma";
-import config from "../../../config";
-import bcrypt from "bcrypt";
-import ApiError from "../../../errors/ApiError";
-import httpStatus from "http-status";
+
 import { ICategory } from "./category.interface";
 
 const createCategory = async (payload: ICategory) => {
@@ -19,39 +16,15 @@ const createCategory = async (payload: ICategory) => {
 
   return res ;
 };
-const insertIntoDB = async (data: User): Promise<User> => {
-  const { password, ...user } = data;
+const getCategory = async () => {
+ 
+  const res= await prisma.category.findMany();
+ 
 
-  //checking exists user by email
-  if (user?.email) {
-    const existUser = await prisma.user.findUnique({
-      where: {
-        email: user?.email,
-      },
-    });
-    if (existUser) {
-      throw new ApiError(
-        httpStatus.BAD_REQUEST,
-        "Already exists this user. Please try again other email"
-      );
-    }
-  }
-
-  //generate plan password to encrypt password
-  const encodedPassword = await bcrypt.hash(
-    password,
-    Number(config.bycrypt_salt_rounds)
-  );
-
-  //user create
-  const result = await prisma.user.create({
-    data: {
-      ...user,
-      password: encodedPassword,
-    },
-  });
-  return result;
+  return res ;
 };
+
 export const CategoryService = {
-  createCategory
+  createCategory,
+  getCategory
 };

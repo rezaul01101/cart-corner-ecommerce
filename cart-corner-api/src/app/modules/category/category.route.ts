@@ -9,9 +9,9 @@ router.post(
   validateRequest(CategoryValidation.createCategoryZodSchema),
   CategoryController.createCategory
 );
-// router.get(
-//   "/list",
-//   AuthController.registerUser
-// );
+router.get(
+  "/list",
+  CategoryController.getCategory
+);
 
 export const CategoryRoutes = router;
