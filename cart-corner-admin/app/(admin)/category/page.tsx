@@ -3,15 +3,18 @@ import CategoryTable from "@/src/components/Category/CategoryTable";
 import Form from "@/src/components/Forms/Form";
 import FormInput from "@/src/components/Forms/FormInput";
 import FormTextArea from "@/src/components/Forms/FormTextArea";
+import { useCategoryCreateMutation } from "@/src/redux/api/categoryApi";
 import { SubmitHandler } from "react-hook-form";
 interface formValues {
   name: string;
   description: string;
 }
 const Category = () => {
-  const onSubmit: SubmitHandler<formValues> = (data) => {
+  const [categoryCreate]=useCategoryCreateMutation();
+  const onSubmit: SubmitHandler<formValues> = async (data) => {
     try {
-      console.log(data);
+      const res = await categoryCreate(data);
+      console.log(res);
     } catch (error) {
       console.log(error);
     }
