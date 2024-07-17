@@ -3,18 +3,19 @@ import CategoryTable from "@/src/components/Category/CategoryTable";
 import Form from "@/src/components/Forms/Form";
 import FormInput from "@/src/components/Forms/FormInput";
 import FormTextArea from "@/src/components/Forms/FormTextArea";
-import { useCategoryCreateMutation } from "@/src/redux/api/categoryApi";
+import { useCategoryCreateMutation, useCategoryListQuery } from "@/src/redux/api/categoryApi";
 import { SubmitHandler } from "react-hook-form";
 interface formValues {
   name: string;
   description: string;
 }
 const Category = () => {
+  const { data, isLoading,refetch } = useCategoryListQuery({});
   const [categoryCreate]=useCategoryCreateMutation();
-  const onSubmit: SubmitHandler<formValues> = async (data) => {
+  const onSubmit: SubmitHandler<formValues> = async (categoryData) => {
     try {
-      const res = await categoryCreate(data);
-      console.log(res);
+      const res = await categoryCreate(categoryData);
+      refetch();
     } catch (error) {
       console.log(error);
     }
@@ -39,7 +40,7 @@ const Category = () => {
       <h3>Category List</h3>
         <hr className="my-2" />
         <div>
-          <CategoryTable />
+          <CategoryTable data={data} />
         </div>
       </div>
     </div>

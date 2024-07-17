@@ -1,10 +1,10 @@
 
-import { categories } from "@/src/constants/constants";
 import Table from "../Table/Table";
+import { useCategoryListQuery } from "@/src/redux/api/categoryApi";
 const columns = [
   {
-    name: "Title",
-    selector: (row:any) => row.title,
+    name: "Name",
+    selector: (row:any) => row.name,
     sortable: true,
   },
   {
@@ -14,10 +14,13 @@ const columns = [
   },
 ];
 
-const CategoryTable = () => {
+
+
+const CategoryTable = ({data}:any) => {
+
   return (
     <>
-      <Table columns={columns} data={categories} />
+      <Table columns={columns} data={data} />
     </>
   );
 };

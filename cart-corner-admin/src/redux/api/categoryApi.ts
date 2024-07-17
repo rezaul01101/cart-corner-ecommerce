@@ -14,8 +14,14 @@ export const categoryApi = baseApi.injectEndpoints({
         }
       )
     }),
+    categoryList: build.query({
+      query: () => ({
+        url: `${CategoryUrl}/list`,
+        method: "GET",
+      }),
+    }),
   }),
   
 })
 
-export const { useCategoryCreateMutation } = categoryApi
+export const { useCategoryCreateMutation,useCategoryListQuery } = categoryApi

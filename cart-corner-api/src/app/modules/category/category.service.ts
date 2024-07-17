@@ -18,7 +18,11 @@ const createCategory = async (payload: ICategory) => {
 };
 const getCategory = async () => {
  
-  const res= await prisma.category.findMany();
+  const res= await prisma.category.findMany({
+    orderBy: {
+      id: 'desc',
+    },
+  });
  
 
   return res ;
