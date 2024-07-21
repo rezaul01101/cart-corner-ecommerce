@@ -34,5 +34,15 @@ model Category {
 
   @@map("categories")
 }
+model Brand {
+  id          Int           @id @default(autoincrement())
+  name        String
+  description String?        @db.Text
+  deletedAt   DateTime?     @map(name: "deleted_at")
+  createdAt   DateTime      @default(now()) @map(name: "created_at")
+  updatedAt   DateTime      @updatedAt @map(name: "updated_at")
+
+  @@map("brands")
+}
 
 
