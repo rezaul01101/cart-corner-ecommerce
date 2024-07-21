@@ -4,6 +4,8 @@ import Form from "@/src/components/Forms/Form";
 import FormInput from "@/src/components/Forms/FormInput";
 import FormTextArea from "@/src/components/Forms/FormTextArea";
 import { useCategoryCreateMutation, useCategoryListQuery } from "@/src/redux/api/categoryApi";
+import { categorySchemas } from "@/src/schemas/category";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler } from "react-hook-form";
 interface formValues {
   name: string;
@@ -25,7 +27,7 @@ const Category = () => {
       <div className="bg-white shadow-md rounded p-6">
         <h3>Add new Category</h3>
         <hr className="my-2" />
-        <Form submitHandler={onSubmit}>
+        <Form submitHandler={onSubmit} resolver={yupResolver(categorySchemas)}>
           <FormInput name="name" type="text" placeholder="Name" label="Name" />
           <FormTextArea name="description" rows={7} label="Description" />
           <button

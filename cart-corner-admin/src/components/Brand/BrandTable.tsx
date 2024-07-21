@@ -1,10 +1,10 @@
 
-import { brands } from "@/src/constants/constants";
+
 import Table from "../Table/Table";
 const columns = [
   {
-    name: "Title",
-    selector: (row:any) => row.title,
+    name: "Name",
+    selector: (row:any) => row.name,
     sortable: true,
   },
   {
@@ -15,10 +15,10 @@ const columns = [
 ];
 
 
-const BrandTable = () => {
+const BrandTable = ({data}:any) => {
   return (
     <>
-      <Table columns={columns} data={brands} />
+      <Table columns={columns} data={data} />
     </>
   );
 };

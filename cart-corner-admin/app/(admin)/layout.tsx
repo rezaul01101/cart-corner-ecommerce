@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+
 // export const metadata: Metadata = {
 //   title: "Admin panel",
 //   description: "Cart corner is an e-commerce app",

@@ -1,6 +1,7 @@
 "use client";
 import { authKey } from "@/src/constants/storageKey";
 import { getUserInfo, removeUserInfo } from "@/src/services/auth.service";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState, useRef, useEffect } from "react";
 import { FaUser, FaSignOutAlt } from "react-icons/fa";
@@ -60,10 +61,10 @@ const TopBar: React.FC<TopbarProps> = ({ toggleSidebar }) => {
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
               <ul className="py-2">
-                <li className="px-4 py-2 hover:bg-gray-100 flex items-center cursor-pointer">
+                <Link href="/profile" className="px-4 py-2 hover:bg-gray-100 flex items-center cursor-pointer">
                   <FaUser className="mr-2" />
                   <span>Profile</span>
-                </li>
+                </Link>
                 <div
                 onClick={()=>logOut()}
                   className="px-4 py-2 hover:bg-gray-100 flex items-center cursor-pointer"

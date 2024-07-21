@@ -3,6 +3,10 @@ import BrandTable from "@/src/components/Brand/BrandTable";
 import Form from "@/src/components/Forms/Form";
 import FormInput from "@/src/components/Forms/FormInput";
 import FormTextArea from "@/src/components/Forms/FormTextArea";
+import {
+  useBrandCreateMutation,
+  useBrandListQuery,
+} from "@/src/redux/api/brandApi";
 import { brandSchemas } from "@/src/schemas/brand";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler } from "react-hook-form";
@@ -12,13 +16,17 @@ interface formValues {
   file: any;
 }
 const Brand = () => {
-  const onSubmit: SubmitHandler<formValues> = async (data) => {
-    const formData = new FormData();
-    formData.append("file", data["file"] as Blob);
-    formData.append("name", data["name"]);
-    formData.append("description", data["description"]);
+  const { data, refetch } = useBrandListQuery({});
+  const [brandCreate] = useBrandCreateMutation();
+
+  const onSubmit: SubmitHandler<formValues> = async (brandData) => {
+    // const formData = new FormData();
+    // formData.append("file", brandData["file"] as Blob);
+    // formData.append("name", brandData["name"]);
+    // formData.append("description", brandData["description"]);
     try {
-      console.log(data["name"]);
+      const res = await brandCreate(brandData);
+      refetch();
     } catch (error) {
       console.log(error);
     }
@@ -49,7 +57,7 @@ const Brand = () => {
         <h3>Brand List</h3>
         <hr className="my-2" />
         <div>
-          <BrandTable />
+          <BrandTable data={data} />
         </div>
       </div>
     </div>
