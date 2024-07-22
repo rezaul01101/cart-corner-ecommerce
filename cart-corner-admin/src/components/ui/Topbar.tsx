@@ -6,15 +6,16 @@ import { useRouter } from "next/navigation";
 import React, { useState, useRef, useEffect } from "react";
 import { FaUser, FaSignOutAlt } from "react-icons/fa";
 import { FaBarsStaggered } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
-interface TopbarProps {
+
+interface TopBarProps {
   toggleSidebar: () => void;
 }
 
-const TopBar: React.FC<TopbarProps> = ({ toggleSidebar }) => {
+const TopBar: React.FC<TopBarProps> = ({ toggleSidebar }) => {
   const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [userInfo, setUserInfo] = useState<any>();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => {
@@ -30,11 +31,12 @@ const TopBar: React.FC<TopbarProps> = ({ toggleSidebar }) => {
     }
   };
 
+  const store: any = useSelector((state) => state);
+  const authUserInfo = store?.user?.userInfo;
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      const userInfo = getUserInfo();
-      setUserInfo(userInfo);
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
@@ -50,7 +52,7 @@ const TopBar: React.FC<TopbarProps> = ({ toggleSidebar }) => {
         <FaBarsStaggered />
       </button>
       <div className="flex items-center">
-        <span className="mr-3">{userInfo?.name}</span>
+        <span className="mr-3">{authUserInfo?.name}</span>
         <div className="relative" ref={dropdownRef}>
           <img
             src="https://via.placeholder.com/30"

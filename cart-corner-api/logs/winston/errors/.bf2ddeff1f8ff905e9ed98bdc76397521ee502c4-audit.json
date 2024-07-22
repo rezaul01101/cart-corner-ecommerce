@@ -74,6 +74,11 @@
             "date": 1721540158271,
             "name": "/Users/Tareq/Rezaul/Softdevsol/ecommerce/main/cart-corner-api/logs/winston/errors/phu-2024-21-07-11-error.log",
             "hash": "62a2d5713021471102eea9a29a8c0ed11518e8a046912dc5854a0a77a1ee6986"
+        },
+        {
+            "date": 1721549094360,
+            "name": "/Users/Tareq/Rezaul/Softdevsol/ecommerce/main/cart-corner-api/logs/winston/errors/phu-2024-21-07-14-error.log",
+            "hash": "dedabea8159783833a7172a01f80262804cefdeb38bf5b7d682f825731573927"
         }
     ],
     "hashType": "sha256"

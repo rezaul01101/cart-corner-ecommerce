@@ -1,10 +1,12 @@
 "use client";
 import LeftSidebar from "@/src/components/ui/LeftSidebar";
 import TopBar from "@/src/components/ui/Topbar";
-import { isLoggedIn } from "@/src/services/auth.service";
+import { storeUserInfo } from "@/src/redux/features/user/userSlice";
+import { getUserInfo, isLoggedIn } from "@/src/services/auth.service";
 import type { Metadata } from "next";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 
 // export const metadata: Metadata = {
@@ -21,6 +23,7 @@ export default function RootLayout({
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+  const dispatch = useDispatch();
   const userLoggedIn = isLoggedIn();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -29,6 +32,8 @@ export default function RootLayout({
     if (!userLoggedIn) {
       router.push("/login");
     }
+    const userInfo = getUserInfo();
+    dispatch(storeUserInfo(userInfo));
     setIsLoading(true);
   }, [router, isLoading]);
 

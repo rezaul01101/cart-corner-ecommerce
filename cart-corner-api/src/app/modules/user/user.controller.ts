@@ -23,8 +23,20 @@ const getUser = catchAsync(async (req: Request, res: Response)=>{
     data: response,
   });
 })
+const updateUser = catchAsync(async (req: Request, res: Response)=>{
+  const { ...userData } = req.body;
+  const token = req.headers.authorization as string;
+  const response = await UserService.updateUserDB(token,userData);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "User updated  !",
+    data: response,
+  });
+})
 
 export const userController = {
   users,
-  getUser
+  getUser,
+  updateUser
 };

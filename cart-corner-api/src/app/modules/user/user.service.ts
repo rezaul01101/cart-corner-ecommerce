@@ -1,5 +1,6 @@
 import { helper } from "../../../shared/helper";
 import prisma from "../../../shared/prisma";
+import { USER_PROPS } from "./user.interface";
 
 const userList = async () => {
   const users = await prisma.user.findMany();
@@ -10,14 +11,24 @@ const getUserFromDB = async (token:string) => {
   const user = await prisma.user.findFirst({
     where:{
       id:authUser.id
+    }
+  });
+  return user;
+};
+const updateUserDB = async (token:string,data:USER_PROPS) => {
+  const authUser = await helper.authUser(token);
+  const user = await prisma.user.update({
+    where:{
+      id:authUser.id
     },
-    include:{
-      transaction:true
+    data:{
+      name:data?.name
     }
   });
   return user;
 };
 export const UserService = {
     userList,
-    getUserFromDB
+    getUserFromDB,
+    updateUserDB
   };
