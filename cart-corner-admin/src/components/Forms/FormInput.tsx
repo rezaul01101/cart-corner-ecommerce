@@ -40,7 +40,7 @@ const FormInput = ({
           <input
             id={id}
             type={type}
-            className="w-full text-sm py-2 pl-2 border focus:border-black rounded-md"
+            className="w-full text-sm py-2 pl-2 border focus:border-black focus:outline-none rounded-md"
             placeholder={placeholder}
             {...field}
             onBlur={field?.onBlur}
