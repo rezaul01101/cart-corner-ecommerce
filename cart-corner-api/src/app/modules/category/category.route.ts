@@ -15,5 +15,14 @@ router.get(
   "/list",
   CategoryController.getCategory
 );
+router.get(
+  "/:id",
+  CategoryController.getCategoryDetails
+);
+router.get(
+  "/delete/:id",
+  auth("user"),
+  CategoryController.deleteCategory
+);
 
 export const CategoryRoutes = router;

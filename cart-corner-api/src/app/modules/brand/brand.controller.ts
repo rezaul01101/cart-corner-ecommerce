@@ -27,7 +27,32 @@ const getBrand = catchAsync(async (req: Request, res: Response)=> {
   });
 });
 
+const getDetails = catchAsync(async (req: Request, res: Response)=> {
+  const { id } = req.params;
+  const result = await BrandService.brandDetails(Number(id));
+  
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Category Details",
+    data: result,
+  });
+});
+const deleteBrand = catchAsync(async (req: Request, res: Response)=> {
+  const { id } = req.params;
+  const result = await BrandService.deleteBrand(Number(id));
+  
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Category deleted",
+    data: result,
+  });
+});
+
 export const BranController = {
   createBrand,
-  getBrand
+  getBrand,
+  getDetails,
+  deleteBrand
 };

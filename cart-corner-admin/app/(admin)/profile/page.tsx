@@ -29,12 +29,13 @@ const Profile = () => {
     dispatch(storeUserInfo(data));
   };
   return (
-    <div className="grid grid-cols-5 gap-4">
-      <div className="bg-white shadow-md rounded p-6 col-span-2">
+    <div className="grid sm:grid-cols-5 grid-cols-1 sm:gap-4">
+      <div className="bg-white shadow-md rounded p-6 col-span-2 sm:mb-0 mb-3">
         <h3>Update Profile Information</h3>
         <hr className="my-2" />
         <Form submitHandler={onSubmit} resolver={yupResolver(categorySchemas)}>
           <FormInput name="name" type="text" placeholder="Name" label="Name" />
+          <FormInput name="phone" type="text" placeholder="Phone Number" label="Phone Number" />
           <button
             type="submit"
             className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition duration-300"

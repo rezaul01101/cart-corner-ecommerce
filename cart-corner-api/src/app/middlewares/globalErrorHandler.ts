@@ -9,7 +9,7 @@ import ApiError from "../../errors/ApiError";
 import { ZodError } from "zod";
 import handleZodError from "../../errors/handleZodError";
 import { IGenericErrorMessage } from "../../interfaces/error";
-import { errorLogger } from "../../shared/logger";
+import { errorLogger, logger } from "../../shared/logger";
 
 const globalErrorHandler: ErrorRequestHandler = (
   error,
@@ -18,7 +18,7 @@ const globalErrorHandler: ErrorRequestHandler = (
   next: NextFunction
 ) => {
   config.env === "development"
-    ? console.log(`🐱‍🏍 globalErrorHandler ~~`, { error })
+    ? errorLogger.error(`🐱‍🏍 globalErrorHandler ~~`, { error })
     : errorLogger.error(`🐱‍🏍 globalErrorHandler ~~`, error);
 
   let statusCode = 500;

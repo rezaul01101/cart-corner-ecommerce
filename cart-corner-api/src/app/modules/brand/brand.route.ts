@@ -15,5 +15,14 @@ router.get(
   "/list",
   BranController.getBrand
 );
+router.get(
+  "/:id",
+  BranController.getDetails
+);
+router.get(
+  "/delete/:id",
+  auth("user"),
+  BranController.deleteBrand
+);
 
 export const BrandRoutes = router;

@@ -28,8 +28,29 @@ const getBrand = async () => {
   return res ;
 };
 
+const getDetails = async (id: number) => {
+  const res = await prisma.brand.findFirst({
+    where: {
+      id: id,
+    },
+  });
+
+  return res;
+};
+const deleteBrand = async (id: number) => {
+  const res = await prisma.brand.delete({
+    where: {
+      id: id,
+    },
+  });
+
+  return res;
+};
+
 
 export const BrandService = {
   createBrand,
-  getBrand
+  getBrand,
+  getDetails,
+  deleteBrand
 };

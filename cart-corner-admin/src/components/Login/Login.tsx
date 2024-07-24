@@ -58,7 +58,7 @@ const LoginComponent = () => {
           <div className="max-w-md w-full space-y-8">
             <div className="text-center">
               <h1 className="text-2xl font-bold text-red-600">
-                WELCOME CART CORNER ADMIN
+                 CART CORNER ADMIN
               </h1>
               <p className="text-gray-600">Login to your account</p>
             </div>
