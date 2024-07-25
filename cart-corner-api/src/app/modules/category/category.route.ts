@@ -19,8 +19,8 @@ router.get(
   "/:id",
   CategoryController.getCategoryDetails
 );
-router.get(
-  "/delete/:id",
+router.delete(
+  "/:id",
   auth("user"),
   CategoryController.deleteCategory
 );
