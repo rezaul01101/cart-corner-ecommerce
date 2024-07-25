@@ -29,7 +29,7 @@ const getBrand = catchAsync(async (req: Request, res: Response)=> {
 
 const getDetails = catchAsync(async (req: Request, res: Response)=> {
   const { id } = req.params;
-  const result = await BrandService.brandDetails(Number(id));
+  const result = await BrandService.getDetails(Number(id));
   
   sendResponse(res, {
     statusCode: 200,

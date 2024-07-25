@@ -21,8 +21,14 @@ export const brandApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    brandDelete: build.mutation({
+      query: (id) => ({
+        url: `${url}/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
   
 })
 
-export const { useBrandCreateMutation,useBrandListQuery } = brandApi
+export const { useBrandCreateMutation,useBrandListQuery,useBrandDeleteMutation } = brandApi

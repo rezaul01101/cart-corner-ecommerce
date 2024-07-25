@@ -19,8 +19,8 @@ router.get(
   "/:id",
   BranController.getDetails
 );
-router.get(
-  "/delete/:id",
+router.delete(
+  "/:id",
   auth("user"),
   BranController.deleteBrand
 );
