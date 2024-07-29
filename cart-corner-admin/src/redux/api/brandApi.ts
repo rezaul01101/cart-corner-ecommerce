@@ -10,8 +10,8 @@ export const brandApi = baseApi.injectEndpoints({
           {
             url:`${url}/create`,
             method: "POST",
-            data: data,
-            // contentType: "multipart/form-data",
+            data,
+            contentType: "multipart/form-data"
         }
       )
     }),

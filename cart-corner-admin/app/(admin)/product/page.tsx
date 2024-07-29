@@ -2,9 +2,20 @@
 
 import Form from "@/src/components/Forms/Form";
 import FormInput from "@/src/components/Forms/FormInput";
+import FormSelectField from "@/src/components/Forms/FormSelectField";
 import FormTextArea from "@/src/components/Forms/FormTextArea";
 
 const AddNewProduct = () => {
+  const discountTypes=[
+    {
+      label:'Amount',
+      value:'amount'
+    },
+    {
+      label:'Percentage',
+      value:'percentage'
+    },
+  ];
   const onSubmit = () => {};
   return (
     <>
@@ -55,11 +66,12 @@ const AddNewProduct = () => {
                 />
               </div>
               <div>
-                <FormInput
+                <FormSelectField
                   name="discount_type"
-                  type="text"
                   placeholder="BDT"
-                  label=" Type"
+                  label="Type"
+                  options={discountTypes}
+                  id="discount_type"
                 />
               </div>
             </div>

@@ -3,6 +3,7 @@ import BrandTable from "@/src/components/Brand/BrandTable";
 import Form from "@/src/components/Forms/Form";
 import FormInput from "@/src/components/Forms/FormInput";
 import FormTextArea from "@/src/components/Forms/FormTextArea";
+import FormFileInput from "@/src/components/Forms/FormFileInput";
 import Table from "@/src/components/Table/Table";
 import DeleteModal from "@/src/components/ui/DeleteModal";
 import {
@@ -19,7 +20,7 @@ import { FaRegEdit } from "react-icons/fa";
 interface formValues {
   name: string;
   description: string;
-  file: any;
+  image: any;
 }
 const Brand = () => {
 
@@ -58,12 +59,12 @@ const Brand = () => {
   const [brandDelete] = useBrandDeleteMutation();
 
   const onSubmit: SubmitHandler<formValues> = async (brandData) => {
-    // const formData = new FormData();
-    // formData.append("file", brandData["file"] as Blob);
-    // formData.append("name", brandData["name"]);
-    // formData.append("description", brandData["description"]);
     try {
-      const res = await brandCreate(brandData);
+      let InputData = new FormData();
+      InputData.append('image', brandData["image"][0]);
+      InputData.append('name',brandData["name"]);
+      InputData.append('description',brandData["description"]);
+      const res = await brandCreate(InputData);
       refetch();
     } catch (error) {
       console.log(error);
@@ -93,12 +94,7 @@ const Brand = () => {
         <Form submitHandler={onSubmit} resolver={yupResolver(brandSchemas)}>
           <FormInput name="name" type="text" placeholder="Name" label="Name" />
           <FormTextArea name="description" rows={7} label="Description" />
-          <FormInput
-            name="file"
-            type="file"
-            placeholder="Name"
-            label="Brand Logo"
-          />
+          <FormFileInput name="image" multiple={false} label="File" />
           <button
             type="submit"
             className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition duration-300"

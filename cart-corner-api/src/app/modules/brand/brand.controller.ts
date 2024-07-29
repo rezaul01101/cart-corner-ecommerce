@@ -3,22 +3,22 @@ import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import { BrandService } from "./brand.service";
 
-const createBrand = catchAsync(async (req: Request, res: Response)=> {
-  const { ...brandData } = req.body;
+const createBrand = catchAsync(async (req: Request, res: Response) => {
+  const {name,description} = req.body;
+  console.log(name,description,req.file);
   
-  const result = await BrandService.createBrand(brandData);
-  
+  // const result = await BrandService.createBrand(brandData);
+  const result = [];
   sendResponse(res, {
     statusCode: 200,
     success: true,
     message: "Brand created successfully !",
-    data: result,
+    // data: result,
   });
 });
-const getBrand = catchAsync(async (req: Request, res: Response)=> {
-
+const getBrand = catchAsync(async (req: Request, res: Response) => {
   const result = await BrandService.getBrand();
-  
+
   sendResponse(res, {
     statusCode: 200,
     success: true,
@@ -27,10 +27,10 @@ const getBrand = catchAsync(async (req: Request, res: Response)=> {
   });
 });
 
-const getDetails = catchAsync(async (req: Request, res: Response)=> {
+const getDetails = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await BrandService.getDetails(Number(id));
-  
+
   sendResponse(res, {
     statusCode: 200,
     success: true,
@@ -38,10 +38,10 @@ const getDetails = catchAsync(async (req: Request, res: Response)=> {
     data: result,
   });
 });
-const deleteBrand = catchAsync(async (req: Request, res: Response)=> {
+const deleteBrand = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await BrandService.deleteBrand(Number(id));
-  
+
   sendResponse(res, {
     statusCode: 200,
     success: true,
@@ -54,5 +54,5 @@ export const BranController = {
   createBrand,
   getBrand,
   getDetails,
-  deleteBrand
+  deleteBrand,
 };

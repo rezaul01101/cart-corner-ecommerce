@@ -31,7 +31,6 @@ const LoginComponent = () => {
        
         storeUserInfo({ accessToken: res?.accessToken });
         router.push("/dashboard");
-        setLoading(false);
       }
       // console.log(res);
     } catch (error) {
