@@ -7,9 +7,10 @@ import FormSelectField from "@/src/components/Forms/FormSelectField";
 import FormTextArea from "@/src/components/Forms/FormTextArea";
 import { useBrandListQuery } from "@/src/redux/api/brandApi";
 import { useCategoryListQuery } from "@/src/redux/api/categoryApi";
+import { useProductCreateMutation } from "@/src/redux/api/productApi";
 import { SubmitHandler } from "react-hook-form";
 interface formValues {
-  name: string;
+  title: string;
   description: string;
   images: any;
   slug: string;
@@ -19,6 +20,7 @@ interface formValues {
   category: string;
 }
 const AddNewProduct = () => {
+  
   const {
     data: categoryList,
     error: categoryError,
@@ -29,6 +31,7 @@ const AddNewProduct = () => {
     error: brandError,
     isLoading: brandLoading,
   } = useBrandListQuery({});
+  const [productCreate] = useProductCreateMutation();
   const categories = categoryList;
   const brands = brandList;
 
@@ -51,15 +54,15 @@ const AddNewProduct = () => {
     try {
       let InputData = new FormData();
       if (product["images"]) {
-        InputData.append("image", product["images"][0]);
+        InputData.append("images", product["images"]);
       }
-      InputData.append("name", product["name"]);
+      InputData.append("name", product["title"]);
       InputData.append("description", product["description"]);
       InputData.append("price", product["price"]);
       InputData.append("discount", product["discount"]);
-      InputData.append("brand_id", product["brand"]);
-      InputData.append("category_id", product["category"]);
-      // const res = await brandCreate(InputData);
+      InputData.append("brandId", product["brand"]);
+      InputData.append("categoryId", product["category"]);
+      const res = await productCreate(InputData);
     } catch (error) {
       console.log(error);
     }
