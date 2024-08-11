@@ -1,23 +1,24 @@
 "use client";
 
 import Form from "@/src/components/Forms/Form";
+import FormFileInput from "@/src/components/Forms/FormFileInput";
 import FormInput from "@/src/components/Forms/FormInput";
 import FormSelectField from "@/src/components/Forms/FormSelectField";
 import FormTextArea from "@/src/components/Forms/FormTextArea";
 import { useBrandListQuery } from "@/src/redux/api/brandApi";
 import { useCategoryListQuery } from "@/src/redux/api/categoryApi";
-
+import { SubmitHandler } from "react-hook-form";
+interface formValues {
+  name: string;
+  description: string;
+  images: any;
+  slug: string;
+  price: string;
+  discount: string;
+  brand: string;
+  category: string;
+}
 const AddNewProduct = () => {
-  const discountTypes = [
-    {
-      label: "Amount",
-      value: "amount",
-    },
-    {
-      label: "Percentage",
-      value: "percentage",
-    },
-  ];
   const {
     data: categoryList,
     error: categoryError,
@@ -44,7 +45,25 @@ const AddNewProduct = () => {
     };
   });
 
-  const onSubmit = () => {};
+  const onSubmit:SubmitHandler<formValues> = async (product) =>{
+    console.log(product);
+    
+    try {
+      let InputData = new FormData();
+      if (product["images"]) {
+        InputData.append("image", product["images"][0]);
+      }
+      InputData.append("name", product["name"]);
+      InputData.append("description", product["description"]);
+      InputData.append("price", product["price"]);
+      InputData.append("discount", product["discount"]);
+      InputData.append("brand_id", product["brand"]);
+      InputData.append("category_id", product["category"]);
+      // const res = await brandCreate(InputData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <Form submitHandler={onSubmit}>
@@ -58,12 +77,6 @@ const AddNewProduct = () => {
               type="text"
               placeholder="Title"
               label="Title"
-            />
-            <FormInput
-              name="slug"
-              type="text"
-              placeholder="Slug"
-              label="Slug"
             />
             <FormTextArea name="description" rows={7} label="Description" />
             <button
@@ -108,6 +121,13 @@ const AddNewProduct = () => {
                 label="Select Brand"
                 options={brandData}
                 id="brand"
+              />
+            </div>
+            <div>
+              <FormFileInput
+                name="image"
+                multiple={true}
+                label="Product Image"
               />
             </div>
           </div>

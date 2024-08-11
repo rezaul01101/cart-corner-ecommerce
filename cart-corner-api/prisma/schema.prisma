@@ -33,6 +33,7 @@ model Category {
   deletedAt   DateTime?     @map(name: "deleted_at")
   createdAt   DateTime      @default(now()) @map(name: "created_at")
   updatedAt   DateTime      @updatedAt @map(name: "updated_at")
+  products    Product[]
 
   @@map("categories")
 }
@@ -44,8 +45,27 @@ model Brand {
   deletedAt   DateTime?     @map(name: "deleted_at")
   createdAt   DateTime      @default(now()) @map(name: "created_at")
   updatedAt   DateTime      @updatedAt @map(name: "updated_at")
+  products    Product[]
 
   @@map("brands")
+}
+model Product {
+  id          Int           @id @default(autoincrement())
+  name        String
+  images      String?       @db.Text
+  description String?       @db.Text
+  price       Int         
+  discount    Int?        
+  categoryId  Int?          @map(name: "category_id")
+  brandId     Int?          @map(name: "brand_id")
+  deletedAt   DateTime?     @map(name: "deleted_at")
+  createdAt   DateTime      @default(now()) @map(name: "created_at")
+  updatedAt   DateTime      @updatedAt @map(name: "updated_at")
+
+  brand       Brand?     @relation(fields: [brandId], references: [id])
+  category    Category?  @relation(fields: [categoryId], references: [id])
+
+  @@map("products")
 }
 
 
