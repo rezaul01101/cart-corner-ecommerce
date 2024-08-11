@@ -2,18 +2,23 @@ import { Request, Response } from "express";
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import { BrandService } from "./brand.service";
+import { IBrand } from "./brand.interface";
 
 const createBrand = catchAsync(async (req: Request, res: Response) => {
   const {name,description} = req.body;
-  console.log(name,description,req.file);
+  const file= req.file;
+  const data:IBrand ={
+    name:name,
+    description:description,
+    image:file?.path
+  }
   
-  // const result = await BrandService.createBrand(brandData);
-  const result = [];
+  const result = await BrandService.createBrand(data);
   sendResponse(res, {
     statusCode: 200,
     success: true,
     message: "Brand created successfully !",
-    // data: result,
+    data: result,
   });
 });
 const getBrand = catchAsync(async (req: Request, res: Response) => {

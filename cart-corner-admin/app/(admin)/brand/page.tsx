@@ -1,5 +1,5 @@
 "use client";
-import BrandTable from "@/src/components/Brand/BrandTable";
+// import BrandTable from "@/src/components/Brand/BrandTable";
 import Form from "@/src/components/Forms/Form";
 import FormInput from "@/src/components/Forms/FormInput";
 import FormTextArea from "@/src/components/Forms/FormTextArea";
@@ -17,6 +17,8 @@ import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
+import Image from "next/image";
+import { baseUrl } from "@/src/helpers/config/envConfig";
 interface formValues {
   name: string;
   description: string;
@@ -31,6 +33,11 @@ const Brand = () => {
     {
       name: "Name",
       selector: (row:any) => row.name,
+      sortable: true,
+    },
+    {
+      name: "Image",
+      selector: (row:any) => <Image src={baseUrl()+row?.image} width={100} height={100} alt={row?.name} />,
       sortable: true,
     },
     {
@@ -61,7 +68,9 @@ const Brand = () => {
   const onSubmit: SubmitHandler<formValues> = async (brandData) => {
     try {
       let InputData = new FormData();
-      InputData.append('image', brandData["image"][0]);
+      if(brandData["image"]){
+        InputData.append('image', brandData["image"][0]);
+      }
       InputData.append('name',brandData["name"]);
       InputData.append('description',brandData["description"]);
       const res = await brandCreate(InputData);

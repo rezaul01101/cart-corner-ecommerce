@@ -4,18 +4,46 @@ import Form from "@/src/components/Forms/Form";
 import FormInput from "@/src/components/Forms/FormInput";
 import FormSelectField from "@/src/components/Forms/FormSelectField";
 import FormTextArea from "@/src/components/Forms/FormTextArea";
+import { useBrandListQuery } from "@/src/redux/api/brandApi";
+import { useCategoryListQuery } from "@/src/redux/api/categoryApi";
 
 const AddNewProduct = () => {
-  const discountTypes=[
+  const discountTypes = [
     {
-      label:'Amount',
-      value:'amount'
+      label: "Amount",
+      value: "amount",
     },
     {
-      label:'Percentage',
-      value:'percentage'
+      label: "Percentage",
+      value: "percentage",
     },
   ];
+  const {
+    data: categoryList,
+    error: categoryError,
+    isLoading: categoryLoading,
+  } = useCategoryListQuery({});
+  const {
+    data: brandList,
+    error: brandError,
+    isLoading: brandLoading,
+  } = useBrandListQuery({});
+  const categories = categoryList;
+  const brands = brandList;
+
+  const categoriesData = categories?.map((category: any) => {
+    return {
+      label: category?.name,
+      value: category?.id,
+    };
+  });
+  const brandData = brands?.map((brand: any) => {
+    return {
+      label: brand?.name,
+      value: brand?.id,
+    };
+  });
+
   const onSubmit = () => {};
   return (
     <>
@@ -48,8 +76,8 @@ const AddNewProduct = () => {
           <div className="bg-white shadow-md rounded p-6 col-span-3">
             <h3 className="mb-1">Product Information</h3>
             <hr className="mb-3" />
-            <div className="grid grid-cols-5 gap-2">
-              <div className=" col-span-3">
+            <div className="grid grid-cols-2 gap-2">
+              <div>
                 <FormInput
                   name="price"
                   type="text"
@@ -65,15 +93,22 @@ const AddNewProduct = () => {
                   label="Discount"
                 />
               </div>
-              <div>
-                <FormSelectField
-                  name="discount_type"
-                  placeholder="BDT"
-                  label="Type"
-                  options={discountTypes}
-                  id="discount_type"
-                />
-              </div>
+            </div>
+            <div>
+              <FormSelectField
+                name="category"
+                label="Select Category"
+                options={categoriesData}
+                id="category"
+              />
+            </div>
+            <div>
+              <FormSelectField
+                name="brand"
+                label="Select Brand"
+                options={brandData}
+                id="brand"
+              />
             </div>
           </div>
         </div>

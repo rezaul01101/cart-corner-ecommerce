@@ -4,12 +4,13 @@ import { IBrand } from "./brand.interface";
 
 
 const createBrand = async (payload: IBrand) => {
-  const { name, description } = payload;
+  const { name, description,image } = payload;
 
   const res= await prisma.brand.create({
     data:{
       name:name,
-      description:description
+      description:description,
+      image:image
     }
   });
  

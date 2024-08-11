@@ -7,10 +7,10 @@ export type SelectOptions = {
 };
 
 type SelectFieldProps = {
-  id?:string;
+  id?: string;
   options: SelectOptions[];
   name: string;
-  value?: string | string[] | undefined;
+  value?: string | string[] | undefined | number;
   placeholder?: string;
   label?: string;
   defaultValue?: SelectOptions;
@@ -27,8 +27,11 @@ const FormSelectField = ({
   defaultValue,
   handleChange,
 }: SelectFieldProps) => {
-  const { control } = useFormContext();
+  
+  console.log('select options',options);
+  
 
+  const { control } = useFormContext();
   return (
     <div className="mb-2">
       <label htmlFor={id} className="text-sm ">
@@ -41,10 +44,10 @@ const FormSelectField = ({
           <select
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="cursor-pointer block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >
-            {options.map((option) => (
-              <option key={option.value} value={option.value}>
+            {options?.map((option) => (
+              <option className=" cursor-pointer" key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
