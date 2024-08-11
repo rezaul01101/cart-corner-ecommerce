@@ -4,6 +4,7 @@
 /cart-corner-admin/node_modules
 /cart-corner-frontend/node_modules
 /cart-corner-api/node_modules
+/cart-corner-api/upload
 /cart-corner-api/logs
 /.pnp
 .pnp.js
