@@ -13,10 +13,10 @@ router.post(
   upload.array("images"),
   ProductController.createProduct
 );
-// router.get(
-//   "/list",
-//   CategoryController.getCategory
-// );
+router.get(
+  "/list",
+  ProductController.getList
+);
 // router.get(
 //   "/:id",
 //   CategoryController.getCategoryDetails

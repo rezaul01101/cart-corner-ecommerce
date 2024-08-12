@@ -6,7 +6,8 @@ import { ProductService } from "./product.service";
 const createProduct = catchAsync(async (req: Request, res: Response) => {
   const { ...productData } = req.body;
   const images = req.files as Express.Multer.File[];
-
+  console.log(images);
+  
   const imagesList: any[] = [];
   if (images) {
     images.map((item: any) => {
@@ -28,17 +29,17 @@ const createProduct = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
-// const getCategory = catchAsync(async (req: Request, res: Response)=> {
+const getList = catchAsync(async (req: Request, res: Response)=> {
 
-//   const result = await CategoryService.getCategory();
+  const result = await ProductService.list();
 
-//   sendResponse(res, {
-//     statusCode: 200,
-//     success: true,
-//     message: "Category list !",
-//     data: result,
-//   });
-// });
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Category list !",
+    data: result,
+  });
+});
 // const getCategoryDetails = catchAsync(async (req: Request, res: Response)=> {
 //   const { id } = req.params;
 //   const result = await CategoryService.categoryDetails(Number(id));
@@ -64,4 +65,5 @@ const createProduct = catchAsync(async (req: Request, res: Response) => {
 
 export const ProductController = {
   createProduct,
+  getList
 };

@@ -3,6 +3,8 @@ import { IProduct } from "./product.interface";
 
 const createProduct = async (payload: IProduct) => {
   const { files, data } = payload;
+  console.log('service',payload);
+  
   const res = await prisma.product.create({
     data:{
       name:data?.name,
@@ -18,6 +20,22 @@ const createProduct = async (payload: IProduct) => {
   return res;
 };
 
+const list= async ()=>{
+  const res= await prisma.product.findMany({
+    orderBy: {
+      id: 'desc',
+    },
+    include:{
+      category:true,
+      brand:true
+    }
+  });
+ 
+
+  return res ;
+}
+
 export const ProductService = {
-  createProduct
+  createProduct,
+  list
 };

@@ -49,12 +49,16 @@ const AddNewProduct = () => {
   });
 
   const onSubmit:SubmitHandler<formValues> = async (product) =>{
-    console.log(product);
-    
     try {
       let InputData = new FormData();
-      if (product["images"]) {
-        InputData.append("images", product["images"]);
+
+      // if (product["images"] && product["images"].length > 0) {
+      //   product["images"].forEach((image:any) => {
+      //     InputData.append("images", image); // Append each image with the same key
+      //   });
+      // }
+      if(product["images"]){
+        InputData.append("images", product["images"][0]);
       }
       InputData.append("name", product["title"]);
       InputData.append("description", product["description"]);
@@ -128,8 +132,8 @@ const AddNewProduct = () => {
             </div>
             <div>
               <FormFileInput
-                name="image"
-                multiple={true}
+                name="images"
+                multiple={false}
                 label="Product Image"
               />
             </div>

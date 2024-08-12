@@ -15,8 +15,14 @@ export const productApi = baseApi.injectEndpoints({
         }
       )
     }),
+    productList: build.query({
+      query: () => ({
+        url: `${url}/list`,
+        method: "GET",
+      }),
+    }),
   }),
   
 })
 
-export const { useProductCreateMutation } = productApi
+export const { useProductCreateMutation, useProductListQuery} = productApi

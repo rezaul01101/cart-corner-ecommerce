@@ -27,10 +27,6 @@ const FormSelectField = ({
   defaultValue,
   handleChange,
 }: SelectFieldProps) => {
-  
-  console.log('select options',options);
-  
-
   const { control } = useFormContext();
   return (
     <div className="mb-2">
@@ -46,8 +42,15 @@ const FormSelectField = ({
             onChange={(e) => onChange(e.target.value)}
             className="cursor-pointer block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >
+            <option className=" cursor-pointer" value="">
+              Select
+            </option>
             {options?.map((option) => (
-              <option className=" cursor-pointer" key={option.value} value={option.value}>
+              <option
+                className=" cursor-pointer"
+                key={option.value}
+                value={option.value}
+              >
                 {option.label}
               </option>
             ))}

@@ -7,7 +7,8 @@ import type { Metadata } from "next";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // export const metadata: Metadata = {
 //   title: "Admin panel",
@@ -40,6 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <ToastContainer />
         <div className="flex h-screen bg-gray-100">
           <LeftSidebar isOpen={sidebarOpen} />
           <div className="flex-1 flex flex-col">
