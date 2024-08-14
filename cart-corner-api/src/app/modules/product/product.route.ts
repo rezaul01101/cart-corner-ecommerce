@@ -9,8 +9,8 @@ const router = express.Router();
 router.post(
   "/create",
   // validateRequest(CategoryValidation.createCategoryZodSchema),
-  // auth("user"),
-  upload.array("images"),
+  auth("user"),
+  upload.array("images",10),
   ProductController.createProduct
 );
 router.get(
@@ -21,10 +21,10 @@ router.get(
 //   "/:id",
 //   CategoryController.getCategoryDetails
 // );
-// router.delete(
-//   "/:id",
-//   auth("user"),
-//   CategoryController.deleteCategory
-// );
+router.delete(
+  "/:id",
+  auth("user"),
+  ProductController.deleteProduct
+);
 
 export const ProductRoutes = router;

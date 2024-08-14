@@ -1,7 +1,6 @@
 "use client";
 import { ReactElement, ReactNode, useEffect } from "react";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import { toast } from 'react-toastify';
 
 type FormConfig = {
   defaultValues?: Record<string, any>;
@@ -26,16 +25,6 @@ const Form = ({
   const { handleSubmit, reset } = methods;
   const onSubmit = (data: any) => {
     submitHandler(data);
-    toast.success('Information successfully!', {
-      position: "top-right",
-      autoClose: 3000, // 3 seconds
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-
     reset(defaultValues, { keepIsSubmitted: false, keepSubmitCount: false });
   };
   useEffect(() => reset(defaultValues), [defaultValues, reset, methods]);

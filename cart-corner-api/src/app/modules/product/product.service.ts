@@ -3,7 +3,6 @@ import { IProduct } from "./product.interface";
 
 const createProduct = async (payload: IProduct) => {
   const { files, data } = payload;
-  console.log('service',payload);
   
   const res = await prisma.product.create({
     data:{
@@ -35,7 +34,18 @@ const list= async ()=>{
   return res ;
 }
 
+const deleteProduct = async (id: number) => {
+  const res = await prisma.product.delete({
+    where: {
+      id: id,
+    },
+  });
+
+  return res;
+};
+
 export const ProductService = {
   createProduct,
-  list
+  list,
+  deleteProduct
 };

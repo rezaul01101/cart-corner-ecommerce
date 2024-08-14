@@ -9,6 +9,8 @@ import { useBrandListQuery } from "@/src/redux/api/brandApi";
 import { useCategoryListQuery } from "@/src/redux/api/categoryApi";
 import { useProductCreateMutation } from "@/src/redux/api/productApi";
 import { SubmitHandler } from "react-hook-form";
+import { toast } from "react-toastify";
+
 interface formValues {
   title: string;
   description: string;
@@ -20,7 +22,6 @@ interface formValues {
   category: string;
 }
 const AddNewProduct = () => {
-  
   const {
     data: categoryList,
     error: categoryError,
@@ -48,17 +49,14 @@ const AddNewProduct = () => {
     };
   });
 
-  const onSubmit:SubmitHandler<formValues> = async (product) =>{
+  const onSubmit: SubmitHandler<formValues> = async (product) => {
     try {
       let InputData = new FormData();
 
-      // if (product["images"] && product["images"].length > 0) {
-      //   product["images"].forEach((image:any) => {
-      //     InputData.append("images", image); // Append each image with the same key
-      //   });
-      // }
-      if(product["images"]){
-        InputData.append("images", product["images"][0]);
+      if (product["images"].length > 0) {
+        for (let i = 0; i < product["images"].length; i++) {
+          InputData.append("images", product["images"][i]);
+        }
       }
       InputData.append("name", product["title"]);
       InputData.append("description", product["description"]);
@@ -67,6 +65,11 @@ const AddNewProduct = () => {
       InputData.append("brandId", product["brand"]);
       InputData.append("categoryId", product["category"]);
       const res = await productCreate(InputData);
+      if (res) {
+        toast.success("Product saved successfully!", {
+          position: "top-right",
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -133,7 +136,7 @@ const AddNewProduct = () => {
             <div>
               <FormFileInput
                 name="images"
-                multiple={false}
+                multiple={true}
                 label="Product Image"
               />
             </div>

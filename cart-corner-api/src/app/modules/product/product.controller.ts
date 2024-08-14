@@ -51,19 +51,20 @@ const getList = catchAsync(async (req: Request, res: Response)=> {
 //     data: result,
 //   });
 // });
-// const deleteCategory = catchAsync(async (req: Request, res: Response)=> {
-//   const { id } = req.params;
-//   const result = await CategoryService.deleteCategory(Number(id));
+const deleteProduct = catchAsync(async (req: Request, res: Response)=> {
+  const { id } = req.params;
+  const result = await ProductService.deleteProduct(Number(id));
 
-//   sendResponse(res, {
-//     statusCode: 200,
-//     success: true,
-//     message: "Category deleted",
-//     data: result,
-//   });
-// });
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Category deleted",
+    data: result,
+  });
+});
 
 export const ProductController = {
   createProduct,
-  getList
+  getList,
+  deleteProduct
 };
