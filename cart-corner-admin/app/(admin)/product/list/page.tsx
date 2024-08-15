@@ -5,11 +5,13 @@ import {
   useProductDeleteMutation,
   useProductListQuery,
 } from "@/src/redux/api/productApi";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
-import { FaRegEdit } from "react-icons/fa";
+import { FaRegEdit, FaRegEye } from "react-icons/fa";
 
 const ProductList = () => {
+  const router = useRouter();
   const { data: productList, refetch } = useProductListQuery({});
   const [productDelete] = useProductDeleteMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,6 +41,13 @@ const ProductList = () => {
       cell: (row: any, index: any, column: any, id: any) => (
         <>
           <div
+            className="text-green-500 text-xl cursor-pointer"
+            onClick={() => showDetails(row.id)}
+          >
+            <FaRegEye />
+          </div>
+          &nbsp; | &nbsp;
+          <div
             className="text-blue-500 text-xl cursor-pointer"
             onClick={() => editRow(row.id)}
           >
@@ -55,6 +64,9 @@ const ProductList = () => {
       ),
     },
   ];
+  const showDetails = (data: string) => {
+    router.push('/product/'+data)
+  };
   const editRow = (data: string) => {
     alert(data);
   };

@@ -1,6 +1,6 @@
 import express from "express";
 import validateRequest from "../../middlewares/validateRequest";
-import { CategoryValidation } from "./category.validation";
+import { CategoryValidation } from "./product.validation";
 import auth from "../../middlewares/auth";
 import { upload } from "../../../utils/storeImage";
 import { ProductController } from "./product.controller";

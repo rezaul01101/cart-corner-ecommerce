@@ -1,9 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
-import validateRequest from "../../middlewares/validateRequest";
-import { brandValidation } from "./brand.validation";
 import auth from "../../middlewares/auth";
 import { BranController } from "./brand.controller";
-import multer from "multer";
+
 import ApiError from "../../../errors/ApiError";
 import { upload } from "../../../utils/storeImage";
 

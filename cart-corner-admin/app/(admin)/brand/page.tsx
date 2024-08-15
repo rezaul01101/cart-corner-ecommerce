@@ -37,7 +37,7 @@ const Brand = () => {
     },
     {
       name: "Image",
-      selector: (row:any) => <Image src={baseUrl()+row?.image} width={100} height={100} alt={row?.name} />,
+      selector: (row:any) => <Image src={`${baseUrl()}${row?.image}`} width={50} height={50} className=" rounded-full " alt={row?.name} />,
       sortable: true,
     },
     {
