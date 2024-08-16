@@ -21,6 +21,12 @@ export const productApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    productDetails: build.query({
+      query: (id) => ({
+        url: `${url}/${id}`,
+        method: "GET",
+      }),
+    }),
     productDelete: build.mutation({
       query: (id) => ({
         url: `${url}/${id}`,
@@ -31,4 +37,4 @@ export const productApi = baseApi.injectEndpoints({
   
 })
 
-export const { useProductCreateMutation, useProductListQuery,useProductDeleteMutation} = productApi
+export const { useProductCreateMutation, useProductListQuery,useProductDeleteMutation,useProductDetailsQuery} = productApi

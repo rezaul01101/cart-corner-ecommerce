@@ -21,6 +21,7 @@ const ProductList = () => {
       name: "Title",
       selector: (row: any) => row.name,
       sortable: true,
+      width: '60vh',
     },
     {
       name: "Category",
@@ -28,6 +29,7 @@ const ProductList = () => {
         <span className="text-orange-500">{row.category?.name}</span>
       ),
       sortable: true,
+      width: '100px',
     },
     {
       name: "Brand",
@@ -35,6 +37,7 @@ const ProductList = () => {
         <span className="text-green-500">{row.brand?.name}</span>
       ),
       sortable: true,
+      width: '100px',
     },
     {
       name: "Actions",
@@ -62,6 +65,7 @@ const ProductList = () => {
           </div>
         </>
       ),
+      width: '130px',
     },
   ];
   const showDetails = (data: string) => {
@@ -84,7 +88,7 @@ const ProductList = () => {
     setIsModalOpen(true);
   };
   return (
-    <div className="bg-white shadow-md rounded p-6">
+    <div className="bg-white shadow-md rounded p-6 w-full">
       <h3 className="my-3">Product List</h3>
       <hr />
       <Table columns={columns} data={productList} />

@@ -44,7 +44,7 @@ export default function RootLayout({
         <ToastContainer />
         <div className="flex h-screen bg-gray-100">
           <LeftSidebar isOpen={sidebarOpen} />
-          <div className="flex-1 flex flex-col">
+          <div className="flex-1 flex flex-col" style={{width:'80%'}}>
             <TopBar toggleSidebar={toggleSidebar} />
             <main className="flex-1 p-6 overflow-y-auto">{children}</main>
           </div>

@@ -17,10 +17,10 @@ router.get(
   "/list",
   ProductController.getList
 );
-// router.get(
-//   "/:id",
-//   CategoryController.getCategoryDetails
-// );
+router.get(
+  "/:id",
+  ProductController.getProduct
+);
 router.delete(
   "/:id",
   auth("user"),

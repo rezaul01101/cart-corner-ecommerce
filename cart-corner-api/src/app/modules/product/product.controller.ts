@@ -36,21 +36,21 @@ const getList = catchAsync(async (req: Request, res: Response)=> {
   sendResponse(res, {
     statusCode: 200,
     success: true,
-    message: "Category list !",
+    message: "Product list !",
     data: result,
   });
 });
-// const getCategoryDetails = catchAsync(async (req: Request, res: Response)=> {
-//   const { id } = req.params;
-//   const result = await CategoryService.categoryDetails(Number(id));
+const getProduct = catchAsync(async (req: Request, res: Response)=> {
+  const { id } = req.params;
+  const result = await ProductService.details(Number(id));
 
-//   sendResponse(res, {
-//     statusCode: 200,
-//     success: true,
-//     message: "Category Details",
-//     data: result,
-//   });
-// });
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Product Details",
+    data: result,
+  });
+});
 const deleteProduct = catchAsync(async (req: Request, res: Response)=> {
   const { id } = req.params;
   const result = await ProductService.deleteProduct(Number(id));
@@ -58,7 +58,7 @@ const deleteProduct = catchAsync(async (req: Request, res: Response)=> {
   sendResponse(res, {
     statusCode: 200,
     success: true,
-    message: "Category deleted",
+    message: "Product deleted",
     data: result,
   });
 });
@@ -66,5 +66,6 @@ const deleteProduct = catchAsync(async (req: Request, res: Response)=> {
 export const ProductController = {
   createProduct,
   getList,
-  deleteProduct
+  deleteProduct,
+  getProduct
 };

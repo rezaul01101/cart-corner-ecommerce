@@ -34,6 +34,19 @@ const list= async ()=>{
   return res ;
 }
 
+const details = async (id: number) => {
+  const res = await prisma.product.findFirst({
+    where: {
+      id: id,
+    },
+    include:{
+      category:true,
+      brand:true
+    }
+  });
+
+  return res;
+};
 const deleteProduct = async (id: number) => {
   const res = await prisma.product.delete({
     where: {
@@ -47,5 +60,6 @@ const deleteProduct = async (id: number) => {
 export const ProductService = {
   createProduct,
   list,
-  deleteProduct
+  deleteProduct,
+  details
 };
