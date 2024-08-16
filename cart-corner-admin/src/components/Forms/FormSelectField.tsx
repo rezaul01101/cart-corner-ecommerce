@@ -47,6 +47,7 @@ const FormSelectField = ({
             </option>
             {options?.map((option) => (
               <option
+                selected={value===option?.value}
                 className=" cursor-pointer"
                 key={option.value}
                 value={option.value}

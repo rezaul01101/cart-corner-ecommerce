@@ -71,8 +71,8 @@ const ProductList = () => {
   const showDetails = (data: string) => {
     router.push('/product/'+data)
   };
-  const editRow = (data: string) => {
-    alert(data);
+  const editRow = (id: string) => {
+    router.push('/product/edit/'+id)
   };
   //need to optimize more, delete functionality
   const DeleteRow = async () => {

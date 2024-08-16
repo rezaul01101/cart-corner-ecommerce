@@ -17,6 +17,7 @@ const FormTextArea = ({
   value,
   placeholder,
 }: TextAreaProps) => {
+
   const { control } = useFormContext();
   return (
     <>
@@ -27,7 +28,7 @@ const FormTextArea = ({
         control={control}
         name={name}
         render={({ field }) => (
-          <textarea {...field } rows={rows} placeholder={placeholder} className="focus:border-black focus:outline-none w-full text-sm py-2 pl-2 mb-2 border rounded-md">{value ? value : field.value}</textarea>
+          <textarea {...field } rows={rows} placeholder={placeholder} className="focus:border-black focus:outline-none w-full text-sm py-2 pl-2 mb-2 border rounded-md" value={value}>{value ? value : field.value}</textarea>
         )}
       />
     </>
