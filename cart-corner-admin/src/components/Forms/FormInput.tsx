@@ -31,30 +31,28 @@ const FormInput = ({
   const errorMessage = getErrorMessageByPropertyName(errors, name);
 
   return (
-    <>
-      <div className="mb-2">
-        <label htmlFor={id} className="text-sm mb-2">
-          {label}
-        </label>
-        <Controller
-          control={control}
-          name={name}
-          render={({ field }) => (
-            <input
-              id={id}
-              type={type}
-              className="w-full text-sm py-2 pl-2 border focus:border-black focus:outline-none rounded-md"
-              placeholder={placeholder}
-              {...field}
-              onBlur={field?.onBlur}
-              value={value ? value : field.value}
-              required={required}
-            />
-          )}
-        />
-        <small style={{ color: "red" }}>{errorMessage}</small>
-      </div>
-    </>
+    <div className="mb-2">
+      <label htmlFor={id} className="text-sm mb-2">
+        {label}
+      </label>
+      <Controller
+        control={control}
+        name={name}
+        render={({ field }) => (
+          <input
+            id={id}
+            type={type}
+            className="w-full text-sm py-2 pl-2 border focus:border-black focus:outline-none rounded-md"
+            placeholder={placeholder}
+            {...field}
+            onBlur={field?.onBlur}
+            value={value ? value : field.value}
+            required={required}
+          />
+        )}
+      />
+      <small style={{ color: "red" }}>{errorMessage}</small>
+    </div>
   );
 };
 

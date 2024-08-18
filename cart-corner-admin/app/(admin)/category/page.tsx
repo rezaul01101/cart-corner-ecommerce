@@ -28,14 +28,17 @@ const Category = () => {
       name: "Name",
       selector: (row: any) => row.name,
       sortable: true,
+      width:'180px'
     },
     {
       name: "Description",
       selector: (row: any) => row.description,
       sortable: true,
+      width:'200px'
     },
     {
       name: "Actions",
+       width:'100px',
       cell: (row: any, index: any, column: any, id: any) => (
         <>
           <div

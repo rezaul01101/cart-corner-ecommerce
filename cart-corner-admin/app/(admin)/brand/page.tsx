@@ -25,35 +25,52 @@ interface formValues {
   image: any;
 }
 const Brand = () => {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isTempId, setTempId] = useState<number>(0);
 
   const columns = [
     {
       name: "Name",
-      selector: (row:any) => row.name,
+      selector: (row: any) => row.name,
       sortable: true,
+      width:'120px'
     },
     {
       name: "Image",
-      selector: (row:any) => <Image src={`${baseUrl()}${row?.image}`} width={50} height={50} className=" rounded-full " alt={row?.name} />,
+      width:'100px',
+      selector: (row: any) => (
+        <Image
+          src={`${baseUrl()}${row?.image}`}
+          width={50}
+          height={50}
+          className=" rounded-full "
+          alt={row?.name}
+        />
+      ),
       sortable: true,
     },
     {
       name: "Description",
-      selector: (row:any) => row.description,
+      selector: (row: any) => row.description,
       sortable: true,
+      width:'220px'
     },
     {
       name: "Actions",
+      width:'100px',
       cell: (row: any, index: any, column: any, id: any) => (
         <>
-          <div className="text-blue-500 text-xl cursor-pointer" onClick={()=>editRow(row.id)}>
+          <div
+            className="text-blue-500 text-xl cursor-pointer"
+            onClick={() => editRow(row.id)}
+          >
             <FaRegEdit />
           </div>
           &nbsp; | &nbsp;
-          <div className="text-red-500 text-xl cursor-pointer" onClick={()=>handleDelete(row.id)}>
+          <div
+            className="text-red-500 text-xl cursor-pointer"
+            onClick={() => handleDelete(row.id)}
+          >
             <AiOutlineDelete />
           </div>
         </>
@@ -68,22 +85,22 @@ const Brand = () => {
   const onSubmit: SubmitHandler<formValues> = async (brandData) => {
     try {
       let InputData = new FormData();
-      if(brandData["image"]){
-        InputData.append('image', brandData["image"][0]);
+      if (brandData["image"]) {
+        InputData.append("image", brandData["image"][0]);
       }
-      InputData.append('name',brandData["name"]);
-      InputData.append('description',brandData["description"]);
+      InputData.append("name", brandData["name"]);
+      InputData.append("description", brandData["description"]);
       const res = await brandCreate(InputData);
       refetch();
     } catch (error) {
       console.log(error);
     }
   };
-  const editRow=(data:string)=>{
+  const editRow = (data: string) => {
     alert(data);
-  }
-   //need to optimize more, delete functionality
-   const DeleteRow = async () => {
+  };
+  //need to optimize more, delete functionality
+  const DeleteRow = async () => {
     if (isTempId > 0) {
       const res = await brandDelete(isTempId);
       if (res) {
@@ -112,12 +129,10 @@ const Brand = () => {
           </button>
         </Form>
       </div>
-      <div className=" col-span-2 bg-white shadow-md rounded p-6">
+      <div className="col-span-2 bg-white shadow-md rounded p-6">
         <h3>Brand List</h3>
         <hr className="my-2" />
-        <div>
-          <Table columns={columns} data={data} />
-        </div>
+        <Table columns={columns} data={data} />
       </div>
       <DeleteModal
         isOpen={isModalOpen}

@@ -29,7 +29,7 @@ const ProductList = () => {
         <span className="text-orange-500">{row.category?.name}</span>
       ),
       sortable: true,
-      width: '100px',
+      width: '150px',
     },
     {
       name: "Brand",

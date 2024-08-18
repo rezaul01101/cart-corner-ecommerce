@@ -40,9 +40,7 @@ const BrandTable = ({data}:any) => {
     alert(data);
   }
   return (
-    <>
       <Table columns={columns} data={data} />
-    </>
   );
 };
 
