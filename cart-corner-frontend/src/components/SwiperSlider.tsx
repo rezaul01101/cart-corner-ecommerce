@@ -28,43 +28,41 @@ const SwiperSlider = () => {
       }}
       navigation={true}
       modules={[Autoplay, Pagination, Navigation]}
-    //   onSlideChange={() => console.log("slide change")}
-    //   onSwiper={(swiper) => console.log(swiper)}
+      //   onSlideChange={() => console.log("slide change")}
+      //   onSwiper={(swiper) => console.log(swiper)}
     >
       <SwiperSlide>
-        <Image
-          className=" w-full h-[450px] object-cover"
-          src={slider1}
-          alt="slider1"
-        />
+        <div className="relative">
+          <Image
+            className=" w-full h-[450px] object-cover -z-50"
+            src={slider1}
+            alt="slider1"
+          />
+          <div className=" absolute top-[25%] left-20">
+            <h1 className=" text-5xl font-semibold">New Range Of <br /> Samsung Camera</h1>
+            <p className=" text-2xl text-gray-300 mt-5">Samsung EOS600D/Kiss X5</p>
+          </div>
+        </div>
       </SwiperSlide>
       <SwiperSlide>
         <Image
-          className=" w-full h-[450px] object-cover"
+          className=" w-full h-[450px] object-cover -z-50"
           src={slider3}
           alt="slider1"
         />
       </SwiperSlide>
       <SwiperSlide>
-        <Image
-          className=" w-full h-[450px] object-cover"
-          src={slider2}
-          alt="slider1"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Image
-          className=" w-full h-[450px] object-cover"
-          src={slider2}
-          alt="slider1"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Image
-          className=" w-full h-[450px] object-cover"
-          src={slider2}
-          alt="slider1"
-        />
+      <div className="relative">
+          <Image
+            className=" w-full h-[450px] object-cover -z-50"
+            src={slider2}
+            alt="slider1"
+          />
+          <div className=" absolute top-[25%] left-20">
+            <h1 className=" text-5xl font-semibold">New Range Of <br /> Samsung Camera</h1>
+            <p className=" text-2xl text-gray-300 mt-5">Samsung EOS600D/Kiss X5</p>
+          </div>
+        </div>
       </SwiperSlide>
     </Swiper>
   );

@@ -40,7 +40,7 @@ const NavBar = () => {
                   Delivery
                 </Link>
                 {activeMenu === "delivery" && isMenuOpen && (
-                  <div className="absolute bg-white shadow-lg rounded-md py-2 w-64">
+                  <div className="absolute bg-white shadow-lg rounded-md py-2 w-64 z-50">
                     <Link
                       href="/delivery/option1"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
@@ -76,10 +76,10 @@ const NavBar = () => {
                 onMouseLeave={handleMouseLeave}
               >
                 <Link href="/about" className="text-gray-800 font-semibold">
-                  About Us{" "}
+                  About Us
                 </Link>
                 {activeMenu === "about" && isMenuOpen && (
-                  <div className="absolute bg-white shadow-lg rounded-md py-4 grid grid-cols-2 gap-4 p-4 w-64">
+                  <div className="absolute bg-white shadow-lg rounded-md py-4 grid grid-cols-2 gap-4 p-4 w-64 z-50">
                     <div>
                       <h3 className="font-bold text-gray-800 mb-2">Company</h3>
                       <Link

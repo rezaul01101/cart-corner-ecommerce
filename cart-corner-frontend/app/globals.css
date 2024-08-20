@@ -16,3 +16,19 @@
   }
 }
 
+.swiper-button-prev:after{
+  background-color: #fff;
+  content: 'prev';
+  font-size: 20px!important;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+.swiper-button-next:after{
+  background-color: #fff;
+  content: 'prev';
+  font-size: 20px!important;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
