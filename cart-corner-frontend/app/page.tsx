@@ -10,7 +10,7 @@ import Product6 from "@/public/assets/images/product6.jpg";
 import Product7 from "@/public/assets/images/product7.jpg";
 import Footer from "@/src/components/Footer";
 import NavBar from "@/src/components/Navbar";
-import Card from "@/src/utils/FeaturedCard";
+import Card from "@/src/components/FeaturedCard";
 import featured1 from "@/public/assets/images/featured1.jpg"
 import featured2 from "@/public/assets/images/featured2.jpg"
 import featured3 from "@/public/assets/images/featured3.jpg"

@@ -19,14 +19,14 @@ const NavBar = () => {
   return (
     <div>
       {/* Top Bar */}
-      <div className="bg-yellow-500 h-2"></div>
+      <div className="bg-yellow-500 h-1"></div>
 
       {/* Navbar */}
       <nav className="bg-white shadow">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-5">
             {/* Left Side - Links */}
-            <div className="flex space-x-4">
+            <div className="flex space-x-14">
               <Link href="/" className="text-gray-800 font-semibold">
                 Home
               </Link>
@@ -63,7 +63,11 @@ const NavBar = () => {
                 )}
               </div>
 
-              <Link href="/legal-notice" className="text-gray-800 font-semibold">Legal Notice
+              <Link
+                href="/legal-notice"
+                className="text-gray-800 font-semibold"
+              >
+                Legal Notice
               </Link>
 
               <div
@@ -119,18 +123,19 @@ const NavBar = () => {
             </div>
 
             {/* Right Side - Hotline */}
-            <div className="flex items-center">
-              <span className="text-gray-800 font-semibold">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 inline-block mr-2"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path d="M2.003 5.884l2-2A3 3 0 018.122 5.12l.707-.707a1 1 0 00-1.415-1.414L6.707 3.707A1 1 0 015.122 2.293l-.707.707A3 3 0 005.88 8.121l-.707.707a1 1 0 101.414 1.415l.707-.707A3 3 0 018.12 14.88l-.707.707A1 1 0 106.707 17.3l.707-.707a3 3 0 004.243 0l.707-.707a1 1 0 00-1.414-1.415l-.707.707a1 1 0 01-1.415-1.414l.707-.707a1 1 0 101.415-1.415l-.707-.707a3 3 0 00-4.242-4.243l-.707-.707a1 1 0 00-1.415 1.415l.707.707a1 1 0 01-1.415 1.415l-.707-.707a3 3 0 000-4.243L2.003 5.884z" />
-                </svg>
-                Hotline: 1-001-234-5678
-              </span>
+            <div className="flex items-center space-x-4">
+              <Link
+                href="/secure-payment"
+                className="text-gray-800 font-semibold"
+              >
+                Login
+              </Link>
+              <Link
+                href="/secure-payment"
+                className="text-gray-800 font-semibold"
+              >
+                Register
+              </Link>
             </div>
           </div>
         </div>

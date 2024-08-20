@@ -2,7 +2,7 @@ import Image from "next/image";
 import logo from "@/public/assets/images/logo.png";
 const Footer = () => {
   return (
-    <footer className="bg-white mt-3">
+    <footer className="bg-white mt-5">
       <div className="bg-yellow-500 h-1"></div>
       <div className="py-16 grid grid-cols-7 gap-4 container m-auto justify-center items-center">
         <div className=" col-span-3">
