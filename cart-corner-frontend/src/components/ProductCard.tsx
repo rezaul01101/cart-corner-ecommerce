@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Product1 from "@/public/assets/images/product1.jpg";
 import { baseUrl } from "../helpers/config/envConfig";
+import Link from "next/link";
 
 const ProductCard = ({ product }: any) => {
   const images = JSON.parse(product?.images || "[]");
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden my-4 cursor-pointer">
+    <Link href={`/product/${[product?.id]}/${product?.name}`} className="bg-white shadow-md rounded-lg overflow-hidden my-4 cursor-pointer">
       <div className="relative w-full h-[200px]">
         <Image
           src={`${baseUrl()}${images[0]}`}
@@ -24,7 +25,7 @@ const ProductCard = ({ product }: any) => {
         <h2 className="font-semibold line-clamp-2">{product?.name}</h2>
         <p className="mt-1">${product?.price}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

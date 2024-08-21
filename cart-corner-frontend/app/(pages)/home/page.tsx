@@ -1,9 +1,9 @@
 "use client";
 import ProductCard from "@/src/components/ProductCard";
 import Slider from "@/src/components/Slider";
-import TopHeader from "@/src/components/TopHeader";
-import Footer from "@/src/components/Footer";
-import NavBar from "@/src/components/Navbar";
+// import TopHeader from "@/src/components/TopHeader";
+// import Footer from "@/src/components/Footer";
+// import NavBar from "@/src/components/Navbar";
 import Card from "@/src/components/FeaturedCard";
 import featured1 from "@/public/assets/images/featured1.jpg";
 import featured2 from "@/public/assets/images/featured2.jpg";
@@ -12,12 +12,9 @@ import { useProductListQuery } from "@/src/redux/api/productApi";
 
 const Home = () => {
   const { data: products, refetch } = useProductListQuery([]);
-  console.log(products);
 
   return (
-    <main className="">
-      <TopHeader />
-      <NavBar />
+    <div>
       <Slider />
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -52,8 +49,7 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <Footer />
-    </main>
+    </div>
   );
 };
 
