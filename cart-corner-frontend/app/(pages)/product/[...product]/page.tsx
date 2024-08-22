@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import productImage from "@/public/assets/images/product1.jpg";
 import { useProductDetailsQuery } from "@/src/redux/api/productApi";
 import { useParams } from "next/navigation";
 import { baseUrl } from "@/src/helpers/config/envConfig";
 import ProductDetailsSlider from "@/src/components/ProductDetailsSlider";
+import { useEffect, useState } from "react";
 
 const ProductDetails = () => {
+  const [mainImage, setMainImage] = useState<any>("");
   const { product } = useParams();
   let productId = 0;
   if (product.length > 0) {
@@ -15,6 +16,11 @@ const ProductDetails = () => {
   }
   const { data } = useProductDetailsQuery(productId);
   const images = JSON.parse(data?.images || "[]");
+  
+
+  const mainImageHandle = (image: any) => {
+    setMainImage(image);
+  };
   return (
     <div className="container m-auto py-5">
       <div className="flex">
@@ -29,7 +35,7 @@ const ProductDetails = () => {
           <div className="relative w-full h-[450px] border rounded-lg">
             {images?.length > 0 && (
               <Image
-                src={`${baseUrl()}${images[0]}`}
+                src={ mainImage ? `${baseUrl()}${mainImage}`: `${baseUrl()}${images[0]}` }
                 className="h-[200px] w-full rounded-xl"
                 sizes="100vw"
                 layout="fill"
@@ -39,7 +45,7 @@ const ProductDetails = () => {
             )}
           </div>
           <div className="flex gap-2 my-3 border py-3 rounded-lg">
-            <ProductDetailsSlider images={images} />
+            <ProductDetailsSlider images={images} setImage={mainImageHandle} />
           </div>
         </div>
         <div>

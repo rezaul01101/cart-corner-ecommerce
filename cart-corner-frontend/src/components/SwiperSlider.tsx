@@ -19,6 +19,7 @@ const SwiperSlider = () => {
     <Swiper
       spaceBetween={30}
       centeredSlides={true}
+      rewind={true}
       autoplay={{
         delay: 2500,
         disableOnInteraction: false,
