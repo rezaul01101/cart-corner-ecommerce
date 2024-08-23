@@ -1,10 +1,15 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { MdOutlineShoppingBag } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
+
+  const store: any = useSelector((state) => state);
+  const cart = store?.product?.productCart;
 
   const handleMouseEnter = (menu: any) => {
     setActiveMenu(menu);
@@ -124,18 +129,10 @@ const NavBar = () => {
 
             {/* Right Side - Hotline */}
             <div className="flex items-center space-x-4">
-              <Link
-                href="/secure-payment"
-                className="text-gray-800 font-semibold"
-              >
-                Login
-              </Link>
-              <Link
-                href="/secure-payment"
-                className="text-gray-800 font-semibold"
-              >
-                Register
-              </Link>
+              <div className="text-3xl font-bold relative cursor-pointer">
+                <MdOutlineShoppingBag />
+                <div className=" absolute text-white -top-2 -right-1 w-5 bg-red-500 text-sm rounded-full flex items-center justify-center">{cart?.length}</div>
+              </div>
             </div>
           </div>
         </div>
