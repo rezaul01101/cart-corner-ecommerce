@@ -1,17 +1,18 @@
 "use client";
 import ProductCard from "@/src/components/ProductCard";
 import Slider from "@/src/components/Slider";
-// import TopHeader from "@/src/components/TopHeader";
-// import Footer from "@/src/components/Footer";
-// import NavBar from "@/src/components/Navbar";
 import Card from "@/src/components/FeaturedCard";
 import featured1 from "@/public/assets/images/featured1.jpg";
 import featured2 from "@/public/assets/images/featured2.jpg";
 import featured3 from "@/public/assets/images/featured3.jpg";
 import { useProductListQuery } from "@/src/redux/api/productApi";
 
+
 const Home = () => {
+
   const { data: products, refetch } = useProductListQuery([]);
+
+
 
   return (
     <div>

@@ -5,6 +5,8 @@ import Providers from "@/src/lib/Providers";
 import Footer from "@/src/components/Footer";
 import TopHeader from "@/src/components/TopHeader";
 import NavBar from "@/src/components/Navbar";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +28,7 @@ export default function RootLayout({
           <NavBar />
           <div className="min-h-[60vh]">{children}</div>
           <Footer />
+          <ToastContainer autoClose={1000} />
         </body>
       </Providers>
     </html>
