@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
+  const [isSticky, setIsSticky] = useState(false);
 
   const store: any = useSelector((state) => state);
   const cart = store?.product?.productCart;
@@ -21,8 +22,28 @@ const NavBar = () => {
     setIsMenuOpen(false);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 38) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div>
+    <div
+      className={`w-full z-50 transition-all duration-300 ease-in-out ${
+        isSticky ? "fixed top-0 bg-white shadow-lg" : "relative"
+      }`}
+    >
       {/* Top Bar */}
       <div className="bg-yellow-500 h-1"></div>
 
@@ -131,7 +152,9 @@ const NavBar = () => {
             <div className="flex items-center space-x-4">
               <div className="text-3xl font-bold relative cursor-pointer">
                 <MdOutlineShoppingBag />
-                <div className=" absolute text-white -top-2 -right-1 w-5 bg-red-500 text-sm rounded-full flex items-center justify-center">{cart?.length}</div>
+                <div className=" absolute text-white -top-2 -right-1 w-5 bg-red-500 text-sm rounded-full flex items-center justify-center">
+                  {cart?.length}
+                </div>
               </div>
             </div>
           </div>
