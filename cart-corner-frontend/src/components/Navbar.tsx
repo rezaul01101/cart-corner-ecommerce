@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { useSelector } from "react-redux";
+import RightSideCart from "./RightSideCart";
 
 const NavBar = () => {
+  const [isRightSideCartOpen, setIsRightSideCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const [isSticky, setIsSticky] = useState(false);
@@ -150,7 +152,7 @@ const NavBar = () => {
 
             {/* Right Side - Hotline */}
             <div className="flex items-center space-x-4">
-              <div className="text-3xl font-bold relative cursor-pointer">
+              <div className="text-3xl font-bold relative cursor-pointer" onClick={()=>setIsRightSideCartOpen(!isRightSideCartOpen)}>
                 <MdOutlineShoppingBag />
                 <div className=" absolute text-white -top-2 -right-1 w-5 bg-red-500 text-sm rounded-full flex items-center justify-center">
                   {cart?.length}
@@ -160,6 +162,7 @@ const NavBar = () => {
           </div>
         </div>
       </nav>
+      <RightSideCart isOpen={isRightSideCartOpen} setIsOpen={setIsRightSideCartOpen} />
     </div>
   );
 };
