@@ -5,7 +5,6 @@ import Link from "next/link";
 const RightSideCart = ({ isOpen, setIsOpen }: any) => {
   const store: any = useSelector((state) => state);
   const products = store?.product?.productCart;
-  console.log(products);
 
   const toggleCart = () => {
     setIsOpen(!isOpen);

@@ -13,18 +13,22 @@ import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import path from "path";
 const app: Application = express();
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "http://localhost:3002"],
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 
 //parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-app.get('/upload/:imageName', function (req, res) {
-    const { imageName } = req.params;
-    const filepath = path.join(__dirname, '../upload', imageName);
-    res.sendFile(filepath);
+app.get("/upload/:imageName", function (req, res) {
+  const { imageName } = req.params;
+  const filepath = path.join(__dirname, "../upload", imageName);
+  res.sendFile(filepath);
 });
 
 app.use("/api/v1", routes);

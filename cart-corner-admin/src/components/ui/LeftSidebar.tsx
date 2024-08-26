@@ -61,6 +61,15 @@ const menuItems: MenuItem[] = [
     ],
   },
   {
+    title: "Frontend",
+    icon: <AiFillProduct />,
+    url: "#",
+    submenus: [
+      { title: "Slider", url: "/frontend/slider" },
+      { title: "Product List", url: "/product/list" },
+    ],
+  },
+  {
     title: "Reports",
     icon: <FaClipboardList />,
     url: "#",
@@ -81,10 +90,10 @@ const LeftSidebar: React.FC<SidebarProps> = ({ isOpen }) => {
       [index]: !prev[index],
     }));
   };
-  const logOut=()=>{
+  const logOut = () => {
     removeUserInfo(authKey);
     router.push("/login");
-  }
+  };
   return (
     <div
       className={`h-screen bg-gray-900 text-white flex flex-col transition-width duration-300 ${
@@ -136,7 +145,7 @@ const LeftSidebar: React.FC<SidebarProps> = ({ isOpen }) => {
         </ul>
       </div>
       <div
-       onClick={logOut}
+        onClick={logOut}
         className="h-16 border-t border-gray-700 flex items-center justify-center cursor-pointer"
       >
         <FaSignOutAlt className="mr-3" />

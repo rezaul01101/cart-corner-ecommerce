@@ -1,12 +1,12 @@
+
 import Image from "next/image";
-import product1 from "@/public/assets/images/product1.jpg";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { baseUrl } from "../helpers/config/envConfig";
 
 const ShortProductCart = ({product}:any) => {
-    const images = JSON.parse(product?.data?.images || "[]");
+    const images = JSON.parse(product?.data?.images || "[]"); 
   return (
-    <div className="flex items-center my-4">
+    <div className="flex items-center my-4 w-75">
       <div className="relative w-[60px] h-[60px] mr-1 p-1 border rounded-sm">
         <Image
           src={`${baseUrl()}${images[0]}`}

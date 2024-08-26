@@ -14,58 +14,71 @@ datasource db {
 }
 
 model User {
-  id          Int           @id @default(autoincrement())
-  name        String
-  email       String        @unique
-  image       String?
-  password    String
-  deletedAt   DateTime?     @map(name: "deleted_at")
-  createdAt   DateTime      @default(now()) @map(name: "created_at")
-  updatedAt   DateTime      @updatedAt @map(name: "updated_at")
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  image     String?
+  password  String
+  deletedAt DateTime? @map(name: "deleted_at")
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime  @updatedAt @map(name: "updated_at")
 
   @@map("users")
 }
+
 model Category {
-  id          Int           @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   image       String?
-  description String?        @db.Text
-  deletedAt   DateTime?     @map(name: "deleted_at")
-  createdAt   DateTime      @default(now()) @map(name: "created_at")
-  updatedAt   DateTime      @updatedAt @map(name: "updated_at")
+  description String?   @db.Text
+  deletedAt   DateTime? @map(name: "deleted_at")
+  createdAt   DateTime  @default(now()) @map(name: "created_at")
+  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
   products    Product[]
 
   @@map("categories")
 }
+
 model Brand {
-  id          Int           @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
-  image       String?        
-  description String?       @db.Text
-  deletedAt   DateTime?     @map(name: "deleted_at")
-  createdAt   DateTime      @default(now()) @map(name: "created_at")
-  updatedAt   DateTime      @updatedAt @map(name: "updated_at")
+  image       String?
+  description String?   @db.Text
+  deletedAt   DateTime? @map(name: "deleted_at")
+  createdAt   DateTime  @default(now()) @map(name: "created_at")
+  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
   products    Product[]
 
   @@map("brands")
 }
-model Product {
-  id          Int           @id @default(autoincrement())
-  name        String
-  images      String?       @db.Text
-  description String?       @db.Text
-  price       Int         
-  discount    Int?        
-  categoryId  Int?          @map(name: "category_id")
-  brandId     Int?          @map(name: "brand_id")
-  deletedAt   DateTime?     @map(name: "deleted_at")
-  createdAt   DateTime      @default(now()) @map(name: "created_at")
-  updatedAt   DateTime      @updatedAt @map(name: "updated_at")
 
-  brand       Brand?     @relation(fields: [brandId], references: [id])
-  category    Category?  @relation(fields: [categoryId], references: [id])
+model Product {
+  id          Int       @id @default(autoincrement())
+  name        String
+  images      String?   @db.Text
+  description String?   @db.Text
+  price       Int
+  discount    Int?
+  categoryId  Int?      @map(name: "category_id")
+  brandId     Int?      @map(name: "brand_id")
+  deletedAt   DateTime? @map(name: "deleted_at")
+  createdAt   DateTime  @default(now()) @map(name: "created_at")
+  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
+
+  brand    Brand?    @relation(fields: [brandId], references: [id])
+  category Category? @relation(fields: [categoryId], references: [id])
 
   @@map("products")
 }
 
+model Slider {
+  id        Int       @id @default(autoincrement())
+  title     String
+  image     String?
+  sub_title String?   @db.Text
+  deletedAt DateTime? @map(name: "deleted_at")
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime  @updatedAt @map(name: "updated_at")
 
+  @@map("sliders")
+}
