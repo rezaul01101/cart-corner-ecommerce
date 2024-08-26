@@ -6,7 +6,7 @@ import { baseUrl } from "../helpers/config/envConfig";
 const ShortProductCart = ({product}:any) => {
     const images = JSON.parse(product?.data?.images || "[]"); 
   return (
-    <div className="flex items-center my-4 w-75">
+    <div className="flex items-center my-4">
       <div className="relative w-[60px] h-[60px] mr-1 p-1 border rounded-sm">
         <Image
           src={`${baseUrl()}${images[0]}`}
@@ -26,7 +26,7 @@ const ShortProductCart = ({product}:any) => {
         </p>
         <p className="text-sm text-yellow-500">৳{product?.data?.price}</p>
       </div>
-      <div className="w-8 ml-2 flex flex-col items-center justify-center">
+      <div className="w-8 flex flex-col items-center justify-center">
         <div className="text-white w-6 h-6 bg-yellow-400 flex items-center justify-center text-sm rounded-full cursor-pointer">
           <FaMinus />
         </div>

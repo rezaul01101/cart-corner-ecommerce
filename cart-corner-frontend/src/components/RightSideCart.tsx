@@ -23,7 +23,7 @@ const RightSideCart = ({ isOpen, setIsOpen }: any) => {
           <h2 className="text-xl font-semibold text-center">Cart review</h2>
 
           {/* Add your product list here */}
-          <div className="mt-5 h-[78vh] overflow-y-auto">
+          <div className="mt-5 h-[78vh] overflow-y-auto w-72">
             {products?.map((item: any) => (
               <ShortProductCart product={item} key={item.id} />
             ))}
