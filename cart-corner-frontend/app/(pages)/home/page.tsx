@@ -9,11 +9,7 @@ import { useProductListQuery } from "@/src/redux/api/productApi";
 
 
 const Home = () => {
-
   const { data: products, refetch } = useProductListQuery([]);
-
-
-
   return (
     <div>
       <Slider />

@@ -72,7 +72,7 @@ const Slider = () => {
           {sliderList?.map((slider: any) => (
             <div
               key={slider?.id}
-              className="relative w-full h-[200px] mr-1 p-1 border rounded-sm"
+              className="relative w-full h-[200px] mr-1 p-1 border rounded-sm cursor-pointer"
             >
               <Image
                 src={`${baseUrl()}${slider?.image}`}
