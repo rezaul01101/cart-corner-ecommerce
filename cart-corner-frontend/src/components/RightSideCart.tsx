@@ -1,13 +1,18 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ShortProductCart from "./ShortProductCart";
 import Link from "next/link";
+import { removeProductInCart } from "@/src/redux/features/product/productSlice";
 
 const RightSideCart = ({ isOpen, setIsOpen }: any) => {
+  const dispatch = useDispatch();
   const store: any = useSelector((state) => state);
   const products = store?.product?.productCart;
 
   const toggleCart = () => {
     setIsOpen(!isOpen);
+  };
+  const removeProduct = (item: any) => {
+    dispatch(removeProductInCart(item?.data?.id));
   };
 
   return (
@@ -25,7 +30,11 @@ const RightSideCart = ({ isOpen, setIsOpen }: any) => {
           {/* Add your product list here */}
           <div className="mt-5 h-[78vh] overflow-y-auto w-72">
             {products?.map((item: any) => (
-              <ShortProductCart product={item} key={item.id} />
+              <ShortProductCart
+                removeHandle={removeProduct}
+                product={item}
+                key={item?.data?.id}
+              />
             ))}
           </div>
           {/* Add more products as needed */}

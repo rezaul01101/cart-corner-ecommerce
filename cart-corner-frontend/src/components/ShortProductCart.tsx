@@ -3,7 +3,7 @@ import Image from "next/image";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { baseUrl } from "../helpers/config/envConfig";
 
-const ShortProductCart = ({product}:any) => {
+const ShortProductCart = ({product,removeHandle}:any) => {
     const images = JSON.parse(product?.data?.images || "[]"); 
   return (
     <div className="flex items-center my-4">
@@ -16,7 +16,7 @@ const ShortProductCart = ({product}:any) => {
           objectFit="contain"
           alt="product name"
         />
-        <div className=" text-sm absolute -top-2 left-0 bg-red-500 text-white px-1 rounded-md cursor-pointer">
+        <div onClick={()=>removeHandle(product)} className=" text-sm absolute -top-2 left-0 bg-red-500 text-white px-1 rounded-md cursor-pointer">
           X
         </div>
       </div>

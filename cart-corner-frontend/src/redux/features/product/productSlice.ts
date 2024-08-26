@@ -16,7 +16,7 @@ interface Product {
     category?: any;
     brand?: any;
   };
-  cart_count:number
+  cart_count: number;
 }
 interface ProductState {
   productCart: Product[];
@@ -32,10 +32,16 @@ export const productSlice = createSlice({
     storeCart: (state, action: PayloadAction<Product>) => {
       state.productCart.push(action.payload);
     },
+    removeProductInCart: (state, action) => {
+      const newCartProducts = state.productCart?.filter(
+        (product: any) => product?.data?.id !== action.payload
+      );
+      state.productCart = newCartProducts;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { storeCart } = productSlice.actions;
+export const { storeCart, removeProductInCart } = productSlice.actions;
 
 export default productSlice.reducer;

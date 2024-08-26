@@ -15,8 +15,6 @@ import { baseUrl } from "../helpers/config/envConfig";
 
 const Slider = () => {
   const { data: sliderList, refetch } = useSliderListQuery({});
-  console.log("sliderList", sliderList);
-
   return (
     <Swiper
       spaceBetween={30}
@@ -39,7 +37,7 @@ const Slider = () => {
           <div className="relative w-full h-[450px]">
             <Image
               className=" w-full h-[450px] object-cover -z-50"
-              sizes="100vw"
+              sizes="50vw"
               layout="fill"
               objectFit="cover"
               src={`${baseUrl()}${item?.image}`}
