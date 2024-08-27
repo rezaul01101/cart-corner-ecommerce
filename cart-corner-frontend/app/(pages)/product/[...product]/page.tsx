@@ -26,12 +26,12 @@ const ProductDetails = () => {
   const { data: products, refetch } = useProductListQuery([]);
   const { data } = useProductDetailsQuery(productId);
   const images = JSON.parse(data?.images || "[]");
+  const productDescription = JSON.parse(data?.description || "[]");
 
   const mainImageHandle = (image: any) => {
     setMainImage(image);
   };
   const handleCart = () => {
-
     const productCart = {
       data: data,
       cart_count: count,
@@ -86,7 +86,7 @@ const ProductDetails = () => {
           </p>
           <p className=" line-clamp-[10]">
             {" "}
-            <span className="font-bold">Description</span> : {data?.description}
+            <span className="font-bold">Description</span> : {data?.short_description}
           </p>
           <div className="mt-10 flex gap-5">
             {/* counting */}
@@ -148,28 +148,11 @@ const ProductDetails = () => {
 
         {/* Content Section */}
         <div className="mt-6">
-          <h2 className="text-2xl font-semibold text-gray-900">Introduction</h2>
-          <p className="mt-2 text-gray-600">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry&apos;s standard dummy
-            text ever since the 1500s, when an unknown printer took a galley of
-            type and scrambled it to make a type specimen book. It has survived
-            not only five centuries but also the on leap into electronic
-            typesetting, remaining essentially unchanged.
-          </p>
-
-          <h3 className="mt-6 text-xl font-semibold text-gray-900">
-            Features :
-          </h3>
-          <ul className="mt-2 text-gray-600 list-disc list-inside">
-            <li>slim body with metal cover</li>
-            <li>latest Intel Core i5-1135G7 processor (4 cores / 8 threads)</li>
-            <li>8GB DDR4 RAM and fast 512GB PCIe SSD</li>
-            <li>
-              NVIDIA GeForce MX350 2GB GDDR5 graphics card backlit keyboard,
-              touchpad with gesture support
-            </li>
-          </ul>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: productDescription,
+            }}
+          />
         </div>
       </div>
       <div className="m-auto">

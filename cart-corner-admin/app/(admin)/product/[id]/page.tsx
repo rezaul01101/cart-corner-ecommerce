@@ -6,11 +6,10 @@ import { useParams } from "next/navigation";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  console.log(id);
 
   const { data: productDetails, refetch } = useProductDetailsQuery(id);
   const images = JSON.parse(productDetails?.images || "[]");
-
+  const productDescription = JSON.parse(productDetails?.description || "[]");
   return (
     <div className="bg-white shadow-md rounded p-6 w-full">
       <h3 className="my-3">Product Details</h3>
@@ -21,13 +20,16 @@ const ProductDetails = () => {
       </h5>
       <h5>
         <span className="font-bold text-red-500">Description</span>:{" "}
-        {productDetails?.description}
+        {productDetails?.short_description}
       </h5>
       <h5>
         <span className="font-bold text-red-500"> Category</span>:{" "}
         {productDetails?.category?.name}
       </h5>
-      <h5 className="mb-2"><span className="font-bold text-red-500"> Brand</span>: {productDetails?.brand?.name}</h5>
+      <h5 className="mb-2">
+        <span className="font-bold text-red-500"> Brand</span>:{" "}
+        {productDetails?.brand?.name}
+      </h5>
       <h5 className=" mb-2">
         Price: &nbsp;
         <span className="text-red-400 font-bold">
@@ -56,6 +58,14 @@ const ProductDetails = () => {
             />
           </div>
         ))}
+      </div>
+      <div>
+        <h3 className="my-2 text-xl font-bold text-red-500">Description</h3>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: productDescription,
+          }}
+        />
       </div>
     </div>
   );
