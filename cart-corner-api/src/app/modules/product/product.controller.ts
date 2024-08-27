@@ -5,9 +5,7 @@ import { ProductService } from "./product.service";
 
 const createProduct = catchAsync(async (req: Request, res: Response) => {
   const { ...productData } = req.body;
-  const images = req.files as Express.Multer.File[];
-  console.log(images);
-  
+  const images = req.files as Express.Multer.File[];  
   const imagesList: any[] = [];
   if (images) {
     images.map((item: any) => {

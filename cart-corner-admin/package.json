@@ -14,6 +14,8 @@
     "axios": "^1.7.2",
     "jwt-decode": "^4.0.0",
     "next": "14.2.5",
+    "novel": "^0.1.22",
+    "novel-lightweight": "^0.2.1",
     "react": "^18",
     "react-data-table-component": "^7.6.2",
     "react-dom": "^18",

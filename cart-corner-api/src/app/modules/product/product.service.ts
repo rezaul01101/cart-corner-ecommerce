@@ -9,6 +9,7 @@ const createProduct = async (payload: IProduct) => {
       name:data?.name,
       images:files,
       description:data?.description,
+      short_description:data?.short_description,
       price:Number(data?.price),
       discount:Number(data?.discount),
       categoryId:Number(data?.categoryId),
