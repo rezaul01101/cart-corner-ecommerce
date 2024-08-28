@@ -1,12 +1,14 @@
 "use client";
 import { Editor } from "novel-lightweight";
+import { generateJSON } from "@tiptap/html";
 
-const NovelLightWeightEditor = ({ setContent, title }: any) => {
+
+const NovelLightWeightEditor = ({ setContent }: any) => {
   return (
     <div className="">
       <Editor
         className="relative min-h-[400px] w-full"
-        defaultValue={"Write Product Description"}
+        defaultValue={""}
         disableLocalStorage={true}
         onUpdate={(editor) => {
           // setContent(editor?.storage.markdown.getMarkdown());

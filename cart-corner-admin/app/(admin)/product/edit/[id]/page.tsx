@@ -1,5 +1,6 @@
 "use client";
 
+import NovelLightWeightEditor from "@/src/components/Editor/NovelLightWeightEditor";
 import Form from "@/src/components/Forms/Form";
 import FormFileInput from "@/src/components/Forms/FormFileInput";
 import FormInput from "@/src/components/Forms/FormInput";
@@ -14,6 +15,7 @@ import {
 } from "@/src/redux/api/productApi";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -31,6 +33,8 @@ const EditProduct = () => {
   const { id } = useParams();
   const { data: productDetails, refetch } = useProductDetailsQuery(id);
   const images = JSON.parse(productDetails?.images || "[]");
+  const productDescription = JSON.parse(productDetails?.description || "[]");
+  const [content, setContent] = useState<string | undefined>("");
   const {
     data: categoryList,
     error: categoryError,
@@ -86,95 +90,105 @@ const EditProduct = () => {
   return (
     <>
       <Form submitHandler={onSubmit}>
-        <div className="grid grid-cols-7 gap-4">
-          <div className="bg-white shadow-md rounded p-6 col-span-4">
-            <h3 className="mb-1">Basic Information</h3>
-            <hr className="mb-3" />
+        <div>
+          <div className="grid grid-cols-7 gap-4">
+            <div className="bg-white shadow-md rounded p-6 col-span-4">
+              <h3 className="mb-1">Basic Information</h3>
+              <hr className="mb-3" />
 
-            <FormInput
-              name="title"
-              type="text"
-              placeholder="Title"
-              label="Title"
-              value={productDetails?.name}
+              <FormInput
+                name="title"
+                type="text"
+                placeholder="Title"
+                label="Title"
+                value={productDetails?.name}
+              />
+              <FormTextArea
+                name="description"
+                rows={7}
+                value={productDetails?.short_description}
+                label="Description"
+              />
+            </div>
+            <div className="bg-white shadow-md rounded p-6 col-span-3">
+              <h3 className="mb-1">Product Information</h3>
+              <hr className="mb-3" />
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <FormInput
+                    name="price"
+                    type="text"
+                    placeholder="BDT"
+                    label="Price"
+                    value={productDetails?.price}
+                  />
+                </div>
+                <div>
+                  <FormInput
+                    name="discount"
+                    type="text"
+                    placeholder="BDT"
+                    label="Discount"
+                    value={productDetails?.discount}
+                  />
+                </div>
+              </div>
+              <div>
+                <FormSelectField
+                  name="category"
+                  label="Select Category"
+                  options={categoriesData}
+                  id="category"
+                  value={productDetails?.categoryId}
+                />
+              </div>
+              <div>
+                <FormSelectField
+                  name="brand"
+                  label="Select Brand"
+                  options={brandData}
+                  id="brand"
+                  value={productDetails?.brandId}
+                />
+              </div>
+              <div>
+                <FormFileInput
+                  name="images"
+                  multiple={true}
+                  label="Product Image"
+                />
+              </div>
+              <div className="grid gap-1 grid-cols-3 mt-5">
+                {images?.map((item: string, index: number) => (
+                  <div
+                    key={index}
+                    className=" border-gray-500 border flex items-center justify-center rounded-lg"
+                  >
+                    <Image
+                      src={baseUrl() + item}
+                      width={100}
+                      height={120}
+                      className=" object-cover"
+                      alt={productDetails?.name}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="w-full bg-white mt-5">
+            <NovelLightWeightEditor
+              setContent={setContent}
             />
-            <FormTextArea
-              name="description"
-              rows={7}
-              value={productDetails?.description}
-              label="Description"
-            />
+          </div>
+          <div className="flex py-2 items-center justify-center">
             <button
               type="submit"
-              className=" w-1/2 bg-black text-white py-2 px-4 m-auto rounded hover:bg-gray-800 transition duration-300"
+              style={{ backgroundColor: "#000" }}
+              className="w-1/2 bg-black text-white py-2 px-4 m-auto rounded hover:bg-gray-800 transition duration-300"
             >
               Save
             </button>
-          </div>
-          <div className="bg-white shadow-md rounded p-6 col-span-3">
-            <h3 className="mb-1">Product Information</h3>
-            <hr className="mb-3" />
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <FormInput
-                  name="price"
-                  type="text"
-                  placeholder="BDT"
-                  label="Price"
-                  value={productDetails?.price}
-                />
-              </div>
-              <div>
-                <FormInput
-                  name="discount"
-                  type="text"
-                  placeholder="BDT"
-                  label="Discount"
-                  value={productDetails?.discount}
-                />
-              </div>
-            </div>
-            <div>
-              <FormSelectField
-                name="category"
-                label="Select Category"
-                options={categoriesData}
-                id="category"
-                value={productDetails?.categoryId}
-              />
-            </div>
-            <div>
-              <FormSelectField
-                name="brand"
-                label="Select Brand"
-                options={brandData}
-                id="brand"
-                value={productDetails?.brandId}
-              />
-            </div>
-            <div>
-              <FormFileInput
-                name="images"
-                multiple={true}
-                label="Product Image"
-              />
-            </div>
-            <div className="grid gap-1 grid-cols-3 mt-5">
-              {images?.map((item: string, index: number) => (
-                <div
-                  key={index}
-                  className=" border-gray-500 border flex items-center justify-center rounded-lg"
-                >
-                  <Image
-                    src={baseUrl() + item}
-                    width={100}
-                    height={120}
-                    className=" object-cover"
-                    alt={productDetails?.name}
-                  />
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </Form>

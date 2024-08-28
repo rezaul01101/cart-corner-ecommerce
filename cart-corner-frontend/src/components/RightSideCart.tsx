@@ -43,7 +43,7 @@ const RightSideCart = ({ isOpen, setIsOpen }: any) => {
               className="py-3 px-2 bg-gray-600 w-full text-center text-white rounded-md"
               href={"/cart"}
             >
-              View Cart
+              <div onClick={() => setIsOpen(!isOpen)}>View Cart</div>
             </Link>
             <Link
               className="py-3 px-2 bg-yellow-400 w-full text-center text-white rounded-md"

@@ -26,7 +26,7 @@ interface formValues {
   category: string;
 }
 const AddNewProduct = () => {
-  const [content, setContent] = useState<string | undefined>("");
+  const [content, setContent] = useState<any>("");
   const {
     data: categoryList,
     error: categoryError,
