@@ -5,7 +5,7 @@
   "scripts": {
     "start": "ts-node-dev --respawn --transpile-only src/server.ts"
   },
-  "repository": "https://github.com/rezaul01101/money-management-server",
+  "repository": "#",
   "author": "Rezaul Hoque",
   "license": "MIT",
   "dependencies": {

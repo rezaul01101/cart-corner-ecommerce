@@ -1,26 +1,32 @@
-import React from "react";
+"use client";
+import { baseUrl } from "@/src/helpers/config/envConfig";
+import { decreaseProductCount, increaseProductCount, selectTotalPrice } from "@/src/redux/features/product/productSlice";
+import Image from "next/image";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Cart = () => {
-  const data = [
-    {
-      name: "All Natural Italian-Style Chicken Meatballs",
-      price: 7.25,
-      quantity: 2,
-      image: "https://via.placeholder.com/100",
-    },
-    {
-      name: "Encore Seafoods Stuffed Alaskan Salmon",
-      price: 27.49,
-      quantity: 1,
-      image: "https://via.placeholder.com/100",
-    },
-    {
-      name: "USDA Choice Angus Beef Stew Meat",
-      price: 49.99,
-      quantity: 1,
-      image: "https://via.placeholder.com/100",
-    },
-  ];
+  const dispatch = useDispatch();
+  const [count, setCount] = useState<number>(1);
+  const store: any = useSelector((state) => state);
+  const products = store?.product?.productCart;
+  const totalPrice = useSelector(selectTotalPrice);
+
+  const stringToParseImage = (images: any) => {
+    const imagesData = JSON.parse(images || "[]");
+    if (imagesData?.length > 0) {
+      return imagesData[0];
+    } else {
+      return null;
+    }
+  };
+
+  const handleIncreaseProduct = (id:number) => {
+    dispatch(increaseProductCount(id));
+  };
+  const handleDecreaseProduct = (id:number) => {
+    dispatch(decreaseProductCount(id));
+  };
   return (
     <div className="container mx-auto w-full min-h-screen py-8">
       {/* Grid Container */}
@@ -48,43 +54,53 @@ const Cart = () => {
                 </tr>
               </thead>
               <tbody>
-                {data.map((item, index) => (
+                {products.map((item: any, index: number) => (
                   <tr key={index} className="my-3">
-                    <td className="flex gap-3 items-center mb-3">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-16 h-16 object-cover rounded"
-                      />
-                      <p className="text-sm font-medium text-gray-800">
-                        {item.name}
+                    <td className="grid grid-cols-5 gap-3 items-center mb-3">
+                      <div className="relative w-16 h-16 mr-1 p-1 border rounded-sm">
+                        <Image
+                          src={
+                            stringToParseImage &&
+                            `${baseUrl()}${stringToParseImage(
+                              item?.data?.images
+                            )}`
+                          }
+                          className="w-16 h-16 object-cover rounded"
+                          sizes="100vw"
+                          layout="fill"
+                          objectFit="contain"
+                          alt="product name"
+                        />
+                      </div>
+                      <p className="text-sm font-medium text-gray-800 col-span-4 w-3/4">
+                        {item?.data?.name}
                       </p>
                     </td>
-                    <td>
+                    <td className=" w-24">
                       <p className="text-sm text-gray-500">
-                        ${item.price.toFixed(2)}
+                        ৳{(item?.data?.price).toLocaleString()}
                       </p>
                     </td>
-                    <td>
+                    <td className="w-24">
                       <div className="flex items-center space-x-2">
-                        <button className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300">
+                        <button  onClick={() => handleDecreaseProduct(item?.data?.id)} className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300">
                           -
                         </button>
                         <span className="text-sm font-medium text-gray-800">
-                          {item.quantity}
+                          {item?.cart_count}
                         </span>
-                        <button className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300">
+                        <button onClick={() => handleIncreaseProduct(item?.data?.id)} className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300">
                           +
                         </button>
                       </div>
                     </td>
                     <td>
                       <p className="text-sm font-semibold text-gray-800">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ৳{(item?.data?.price * item?.cart_count).toLocaleString()}
                       </p>
                     </td>
                     <td>
-                      <button className="text-gray-500 hover:text-red-600 text-xl ">
+                      <button className="text-gray-500 hover:text-red-600 text-xl ml-2">
                         x
                       </button>
                     </td>
@@ -121,7 +137,7 @@ const Cart = () => {
             {/* Subtotal */}
             <div className="flex justify-between text-sm font-medium text-gray-800">
               <p>Subtotal</p>
-              <p>$91.98</p>
+              <p>৳{totalPrice.toLocaleString()}</p>
             </div>
             {/* Shipping Options */}
             <div className="text-sm font-medium text-gray-800">
@@ -149,11 +165,11 @@ const Cart = () => {
             {/* Total */}
             <div className="flex justify-between text-xl font-bold text-gray-800 mt-4">
               <p>Total</p>
-              <p>$91.98</p>
+              <p>৳{totalPrice.toLocaleString()}</p>
             </div>
           </div>
           {/* Checkout Button */}
-          <button className="mt-6 w-full bg-red-500 text-white py-3 rounded text-sm font-medium hover:bg-red-600">
+          <button className="mt-6 w-full bg-yellow-500 text-white py-3 rounded text-sm font-medium hover:bg-yellow-400">
             Proceed to checkout
           </button>
         </div>

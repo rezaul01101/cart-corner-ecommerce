@@ -4,8 +4,7 @@ import { baseUrl } from "../helpers/config/envConfig";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { storeCart } from "@/src/redux/features/product/productSlice";
-import { toast } from 'react-toastify';
-
+import { toast } from "react-toastify";
 
 const ProductCard = ({ product }: any) => {
   const dispatch = useDispatch();
@@ -16,7 +15,7 @@ const ProductCard = ({ product }: any) => {
       cart_count: 1,
     };
     dispatch(storeCart(productCart));
-    toast("Product added in cart")
+    toast("Product added in cart");
   };
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden my-4 cursor-pointer relative">
@@ -44,7 +43,7 @@ const ProductCard = ({ product }: any) => {
         </div>
       </Link>
       <div className="absolute bottom-3 flex justify-between w-full items-center">
-        <p className="text-yellow-500 pl-3">${product?.price}</p>
+        <p className="text-yellow-500 pl-3">৳{product?.price}</p>
         <div
           onClick={() => handleCart(product)}
           className=" bg-yellow-400 w-10 h-9 cursor-pointer  rounded-l-md text-white flex items-center justify-center"
