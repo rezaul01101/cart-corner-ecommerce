@@ -1,6 +1,6 @@
 "use client";
 import { baseUrl } from "@/src/helpers/config/envConfig";
-import { decreaseProductCount, increaseProductCount, selectTotalPrice } from "@/src/redux/features/product/productSlice";
+import { decreaseProductCount, increaseProductCount, removeProductInCart, selectTotalPrice } from "@/src/redux/features/product/productSlice";
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +26,9 @@ const Cart = () => {
   };
   const handleDecreaseProduct = (id:number) => {
     dispatch(decreaseProductCount(id));
+  };
+  const removeProduct = (id: number) => {
+    dispatch(removeProductInCart(id));
   };
   return (
     <div className="container mx-auto w-full min-h-screen py-8">
@@ -100,7 +103,7 @@ const Cart = () => {
                       </p>
                     </td>
                     <td>
-                      <button className="text-gray-500 hover:text-red-600 text-xl ml-2">
+                      <button type="button" onClick={()=>removeProduct(item?.data?.id)} className="text-gray-500 hover:text-red-600 text-xl ml-2">
                         x
                       </button>
                     </td>
