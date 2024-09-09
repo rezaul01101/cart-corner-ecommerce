@@ -43,7 +43,7 @@ const ProductCard = ({ product }: any) => {
         </div>
       </Link>
       <div className="absolute bottom-3 flex justify-between w-full items-center">
-        <p className="text-yellow-500 pl-3">৳{product?.price}</p>
+        <p className="text-yellow-500 pl-3">৳{(product?.price - product?.discount)?.toLocaleString()}</p>
         <div
           onClick={() => handleCart(product)}
           className=" bg-yellow-400 w-10 h-9 cursor-pointer  rounded-l-md text-white flex items-center justify-center"

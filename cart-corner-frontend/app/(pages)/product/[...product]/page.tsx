@@ -75,10 +75,10 @@ const ProductDetails = () => {
           <h2 className="text-2xl font-semibold my-2">{data?.name}</h2>
           <div className="flex items-center gap-2">
             <h2 className="text-md font-semibold my-2 text-red-400">
-              ৳<s>{data?.price}</s>
+              ৳<s>{data?.price?.toLocaleString()}</s>
             </h2>
             <h2 className="text-xl font-semibold my-2 text-red-500">
-              ৳{data?.price - data?.discount}
+              ৳{(data?.price - data?.discount)?.toLocaleString()}
             </h2>
           </div>
           <p className="text-md my-2">
