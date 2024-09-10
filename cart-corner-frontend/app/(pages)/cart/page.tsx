@@ -1,7 +1,13 @@
 "use client";
 import { baseUrl } from "@/src/helpers/config/envConfig";
-import { decreaseProductCount, increaseProductCount, removeProductInCart, selectTotalPrice } from "@/src/redux/features/product/productSlice";
+import {
+  decreaseProductCount,
+  increaseProductCount,
+  removeProductInCart,
+  selectTotalPrice,
+} from "@/src/redux/features/product/productSlice";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -21,10 +27,10 @@ const Cart = () => {
     }
   };
 
-  const handleIncreaseProduct = (id:number) => {
+  const handleIncreaseProduct = (id: number) => {
     dispatch(increaseProductCount(id));
   };
-  const handleDecreaseProduct = (id:number) => {
+  const handleDecreaseProduct = (id: number) => {
     dispatch(decreaseProductCount(id));
   };
   const removeProduct = (id: number) => {
@@ -86,24 +92,37 @@ const Cart = () => {
                     </td>
                     <td className="w-24">
                       <div className="flex items-center space-x-2">
-                        <button  onClick={() => handleDecreaseProduct(item?.data?.id)} className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300">
+                        <button
+                          onClick={() => handleDecreaseProduct(item?.data?.id)}
+                          className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300"
+                        >
                           -
                         </button>
                         <span className="text-sm font-medium text-gray-800">
                           {item?.cart_count}
                         </span>
-                        <button onClick={() => handleIncreaseProduct(item?.data?.id)} className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300">
+                        <button
+                          onClick={() => handleIncreaseProduct(item?.data?.id)}
+                          className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300"
+                        >
                           +
                         </button>
                       </div>
                     </td>
                     <td>
                       <p className="text-sm font-semibold text-gray-800">
-                        ৳{(item?.data?.price * item?.cart_count).toLocaleString()}
+                        ৳
+                        {(
+                          item?.data?.price * item?.cart_count
+                        ).toLocaleString()}
                       </p>
                     </td>
                     <td>
-                      <button type="button" onClick={()=>removeProduct(item?.data?.id)} className="text-gray-500 hover:text-red-600 text-xl ml-2">
+                      <button
+                        type="button"
+                        onClick={() => removeProduct(item?.data?.id)}
+                        className="text-gray-500 hover:text-red-600 text-xl ml-2"
+                      >
                         x
                       </button>
                     </td>
@@ -134,7 +153,7 @@ const Cart = () => {
         {/* Right Section: Cart Summary */}
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-lg font-semibold text-gray-800 mb-6">
-            CART TOTALS
+            Order Summery
           </h2>
           <div className="space-y-4">
             {/* Subtotal */}
@@ -172,9 +191,14 @@ const Cart = () => {
             </div>
           </div>
           {/* Checkout Button */}
-          <button className="mt-6 w-full bg-yellow-500 text-white py-3 rounded text-sm font-medium hover:bg-yellow-400">
-            Proceed to checkout
-          </button>
+          <div className="w-full mt-6 flex items-center justify-center">
+            <Link
+              href={"/checkout"}
+              className="bg-yellow-500 text-white text-center py-3 px-6 rounded text-sm font-medium hover:bg-yellow-400"
+            >
+              Proceed to checkout
+            </Link>
+          </div>
         </div>
       </div>
     </div>
