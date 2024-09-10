@@ -21,7 +21,8 @@ model User {
   password  String
   deletedAt DateTime? @map(name: "deleted_at")
   createdAt DateTime  @default(now()) @map(name: "created_at")
-  updatedAt DateTime  @updatedAt @map(name: "updated_at")
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  Order     Order[]
 
   @@map("users")
 }
@@ -33,7 +34,7 @@ model Category {
   description String?   @db.Text
   deletedAt   DateTime? @map(name: "deleted_at")
   createdAt   DateTime  @default(now()) @map(name: "created_at")
-  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
+  updatedAt   DateTime? @updatedAt @map(name: "updated_at")
   products    Product[]
 
   @@map("categories")
@@ -46,7 +47,7 @@ model Brand {
   description String?   @db.Text
   deletedAt   DateTime? @map(name: "deleted_at")
   createdAt   DateTime  @default(now()) @map(name: "created_at")
-  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
+  updatedAt   DateTime? @updatedAt @map(name: "updated_at")
   products    Product[]
 
   @@map("brands")
@@ -64,10 +65,9 @@ model Product {
   brandId           Int?      @map(name: "brand_id")
   deletedAt         DateTime? @map(name: "deleted_at")
   createdAt         DateTime  @default(now()) @map(name: "created_at")
-  updatedAt         DateTime  @updatedAt @map(name: "updated_at")
-
-  brand    Brand?    @relation(fields: [brandId], references: [id])
-  category Category? @relation(fields: [categoryId], references: [id])
+  updatedAt         DateTime? @updatedAt @map(name: "updated_at")
+  brand             Brand?    @relation(fields: [brandId], references: [id])
+  category          Category? @relation(fields: [categoryId], references: [id])
 
   @@map("products")
 }
@@ -79,7 +79,53 @@ model Slider {
   sub_title String?   @db.Text
   deletedAt DateTime? @map(name: "deleted_at")
   createdAt DateTime  @default(now()) @map(name: "created_at")
-  updatedAt DateTime  @updatedAt @map(name: "updated_at")
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
 
   @@map("sliders")
+}
+
+model Order {
+  id              Int           @id @default(autoincrement())
+  fullName        String?       @map(name: "full_name")
+  phoneNumber     String?       @map(name: "phone_number")
+  orderNumber     String        @unique @map(name: "order_number")
+  status          OrderStatus
+  totalPrice      Float         @map(name: "total_price")
+  userId          Int?          @map(name: "user_id")
+  user            User?         @relation(fields: [userId], references: [id])
+  orderItems      OrderItem[]
+  shippingAddress String        @map(name: "shipping_address") @db.Text
+  specialMessage  String        @map(name: "special_message") @db.Text
+  paymentMethod   PaymentMethod @map(name: "payment_method")
+  deletedAt       DateTime?     @map(name: "deleted_at")
+  createdAt       DateTime      @default(now()) @map(name: "created_at")
+  updatedAt       DateTime?     @updatedAt @map(name: "updated_at")
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        Int       @id @default(autoincrement())
+  quantity  Int
+  productId Int       @map(name: "product_id")
+  orderId   Int       @map(name: "order_id")
+  order     Order     @relation(fields: [orderId], references: [id])
+  deletedAt DateTime? @map(name: "deleted_at")
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+
+  @@map("order_items")
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  DEBIT_CARD
+  PAYPAL
+  CASH_ON_DELIVERY
 }

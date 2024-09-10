@@ -8,7 +8,6 @@ export const orderApi = baseApi.injectEndpoints({
         url: `${url}/create`,
         method: "POST",
         data,
-        contentType: "multipart/form-data",
       }),
     }),
     productList: build.query({

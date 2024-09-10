@@ -17,7 +17,7 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const store: any = useSelector((state) => state);
   const products = store?.product?.productCart;
-  const totalPrice = useSelector(selectTotalPrice);
+  const totalPrice: number = useSelector(selectTotalPrice);
   const {
     register,
     handleSubmit,
@@ -25,8 +25,13 @@ const Checkout = () => {
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const orderData = {
+      orderUserData: data,
+      products: products,
+      paymentMethod: 'CASH_ON_DELIVERY',
+    };
     try {
-      const res = await orderCreate(data);
+      const res = await orderCreate(orderData);
       console.log(res);
     } catch (error) {
       console.log(error);
