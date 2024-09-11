@@ -34,7 +34,7 @@ const ProductDetailsSlider = ({ images,setImage }: any) => {
               className="h-[70px] w-full rounded-xl cursor-pointer"
               sizes="100vw"
               layout="fill"
-              objectFit="cover"
+              objectFit="contain"
               alt={"product"}
               onClick={()=>setImage(item)}
             />

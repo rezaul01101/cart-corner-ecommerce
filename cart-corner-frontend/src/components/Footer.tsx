@@ -1,12 +1,15 @@
 import Image from "next/image";
-import logo from "@/public/assets/images/logo.png";
+import logo from "@/public/assets/images/new_logo.png";
+import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="bg-white mt-5">
       <div className="bg-yellow-500 h-1"></div>
       <div className="py-16 grid grid-cols-7 gap-4 container m-auto justify-center items-center">
         <div className=" col-span-3">
-          <Image src={logo} alt="logo" />
+          <Link href={"/"} className="relative w-[160px] ">
+            <Image src={logo} alt="logo" />
+          </Link>
           <p className="mt-3">
             We are a team of designers and developers that create high quality
             Magento, Prestashop, Opencart.
@@ -28,9 +31,10 @@ const Footer = () => {
         </div>
       </div>
       <div className="container mx-auto">
-        <hr className="bg-gray-600"/>
+        <hr className="bg-gray-600" />
         <div className="py-3 text-center">
-          Copyright @ 2024 <span className="text-yellow-500">Cart Corner</span>. All Rights Reserved
+          Copyright @ 2024 <span className="text-yellow-500">Cart Corner</span>.
+          All Rights Reserved
         </div>
       </div>
     </footer>

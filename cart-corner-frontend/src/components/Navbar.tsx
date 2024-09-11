@@ -4,6 +4,9 @@ import Link from "next/link";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { useSelector } from "react-redux";
 import RightSideCart from "./RightSideCart";
+import Image from "next/image";
+
+import logo from "@/public/assets/images/new_logo.png";
 
 const NavBar = () => {
   const [isRightSideCartOpen, setIsRightSideCartOpen] = useState(false);
@@ -52,7 +55,10 @@ const NavBar = () => {
       {/* Navbar */}
       <nav className="bg-white shadow">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-5">
+          <div className="flex justify-between items-center py-1">
+            <Link href={'/'} className="relative w-[150px] ">
+              <Image src={logo} alt="logo" />
+            </Link>
             {/* Left Side - Links */}
             <div className="flex space-x-14">
               <Link href="/" className="text-gray-800 font-semibold">
@@ -152,7 +158,10 @@ const NavBar = () => {
 
             {/* Right Side - Hotline */}
             <div className="flex items-center space-x-4">
-              <div className="text-3xl font-bold relative cursor-pointer" onClick={()=>setIsRightSideCartOpen(!isRightSideCartOpen)}>
+              <div
+                className="text-3xl font-bold relative cursor-pointer"
+                onClick={() => setIsRightSideCartOpen(!isRightSideCartOpen)}
+              >
                 <MdOutlineShoppingBag />
                 <div className=" absolute text-white -top-2 -right-1 w-5 bg-red-500 text-sm rounded-full flex items-center justify-center">
                   {cart?.length}
@@ -162,7 +171,10 @@ const NavBar = () => {
           </div>
         </div>
       </nav>
-      <RightSideCart isOpen={isRightSideCartOpen} setIsOpen={setIsRightSideCartOpen} />
+      <RightSideCart
+        isOpen={isRightSideCartOpen}
+        setIsOpen={setIsRightSideCartOpen}
+      />
     </div>
   );
 };

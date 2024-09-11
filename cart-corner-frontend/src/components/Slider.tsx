@@ -34,9 +34,9 @@ const Slider = () => {
     >
       {sliderList?.map((item: any) => (
         <SwiperSlide key={item?.id}>
-          <div className="relative w-full h-[450px]">
+          <div className="relative w-full h-[550px]">
             <Image
-              className=" w-full h-[450px] object-cover -z-50"
+              className=" w-full h-[550px] object-cover -z-50"
               sizes="50vw"
               layout="fill"
               objectFit="cover"
